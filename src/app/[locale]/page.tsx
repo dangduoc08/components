@@ -9,146 +9,124 @@ import {
   Users,
   Zap,
 } from "lucide-react";
-import Link from "next/link";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { Link } from "@/i18n/navigation";
 
-const NAV_LINKS = [
-  { label: "Features", href: "#features" },
-  { label: "How it works", href: "#how-it-works" },
-  { label: "Pricing", href: "#pricing" },
+const FEATURE_ICONS = [
+  BrainCircuit,
+  FileSearch,
+  Users,
+  BarChart3,
+  ShieldCheck,
+  Zap,
 ];
+const STEPS = ["01", "02", "03"];
 
-const FEATURES = [
-  {
-    icon: BrainCircuit,
-    title: "AI-Powered Screening",
-    description:
-      "Automatically rank and filter candidates based on job fit, culture alignment, and skill signals — before a human ever reviews a resume.",
-  },
-  {
-    icon: FileSearch,
-    title: "Smart Job Matching",
-    description:
-      "Surface the right talent from your pipeline with semantic search that understands context, not just keywords.",
-  },
-  {
-    icon: Users,
-    title: "Collaborative Hiring",
-    description:
-      "Keep your whole team aligned with structured interview scorecards, async feedback, and real-time decision tracking.",
-  },
-  {
-    icon: BarChart3,
-    title: "Workforce Analytics",
-    description:
-      "Track hiring velocity, diversity metrics, and retention signals in one unified dashboard built for HR teams.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Compliance Built-in",
-    description:
-      "Stay audit-ready with GDPR-compliant data handling, EEO tracking, and automated record retention policies.",
-  },
-  {
-    icon: Zap,
-    title: "Workflow Automation",
-    description:
-      "Eliminate repetitive tasks — offer letters, background check triggers, onboarding sequences — all on autopilot.",
-  },
-];
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
 
-const STEPS = [
-  {
-    step: "01",
-    title: "Connect your stack",
-    description:
-      "Integrate with your ATS, HRIS, and job boards in minutes. No engineering required.",
-  },
-  {
-    step: "02",
-    title: "Let AI do the heavy lifting",
-    description:
-      "Owlky screens, scores, and surfaces the best-fit candidates automatically from the moment a role goes live.",
-  },
-  {
-    step: "03",
-    title: "Hire with confidence",
-    description:
-      "Make data-driven decisions, reduce time-to-hire by up to 60%, and build teams that last.",
-  },
-];
+  const t = await getTranslations("landing");
 
-const PLANS = [
-  {
-    name: "Starter",
-    price: "$49",
-    description: "For small teams getting started with smarter hiring.",
-    features: [
-      "Up to 5 active roles",
-      "AI resume screening",
-      "Basic analytics",
-      "Email support",
-    ],
-    isPopular: false,
-    cta: "Get started",
-  },
-  {
-    name: "Growth",
-    price: "$149",
-    description: "For scaling companies that hire continuously.",
-    features: [
-      "Unlimited active roles",
-      "Advanced AI matching",
-      "Workforce analytics",
-      "Workflow automation",
-      "Priority support",
-    ],
-    isPopular: true,
-    cta: "Start free trial",
-  },
-  {
-    name: "Enterprise",
-    price: "Custom",
-    description: "For large organizations with complex hiring needs.",
-    features: [
-      "Everything in Growth",
-      "Custom AI models",
-      "SSO & SCIM",
-      "Dedicated CSM",
-      "SLA guarantee",
-    ],
-    isPopular: false,
-    cta: "Contact sales",
-  },
-];
+  const navLinks = [
+    { label: t("navFeatures"), href: "#features" },
+    { label: t("navHowItWorks"), href: "#how-it-works" },
+    { label: t("navPricing"), href: "#pricing" },
+  ];
 
-const TESTIMONIALS = [
-  {
-    quote:
-      "Owlky cut our time-to-hire in half. The AI screening alone saves our team 20+ hours per week on every role we open.",
-    name: "Sarah Chen",
-    title: "Head of Talent, Finlink",
-  },
-  {
-    quote:
-      "We went from 300 applicants to a shortlist of 12 in under an hour. The signal quality is unlike anything we've used before.",
-    name: "Marcus Webb",
-    title: "VP People, Atlasgrow",
-  },
-  {
-    quote:
-      "Finally an HR tool that thinks like a recruiter. The workflow automations alone paid for the subscription in week one.",
-    name: "Linh Tran",
-    title: "Recruiting Lead, Novapeak",
-  },
-];
+  const features = FEATURE_ICONS.map((icon, index) => ({
+    icon,
+    title: t(`feature${index + 1}Title`),
+    description: t(`feature${index + 1}Description`),
+  }));
 
-const STATS = [
-  { value: "60%", label: "Reduction in time-to-hire" },
-  { value: "3×", label: "More qualified candidates reviewed" },
-  { value: "98%", label: "Customer satisfaction score" },
-];
+  const stats = [
+    { value: t("stat1Value"), label: t("stat1Label") },
+    { value: t("stat2Value"), label: t("stat2Label") },
+    { value: t("stat3Value"), label: t("stat3Label") },
+  ];
 
-export default function Home() {
+  const steps = STEPS.map((step, index) => ({
+    step,
+    title: t(`step${index + 1}Title`),
+    description: t(`step${index + 1}Description`),
+  }));
+
+  const plans = [
+    {
+      name: t("starterName"),
+      price: t("starterPrice"),
+      description: t("starterDescription"),
+      features: [
+        t("starterFeature1"),
+        t("starterFeature2"),
+        t("starterFeature3"),
+        t("starterFeature4"),
+      ],
+      isPopular: false,
+      cta: t("starterCta"),
+    },
+    {
+      name: t("growthName"),
+      price: t("growthPrice"),
+      description: t("growthDescription"),
+      features: [
+        t("growthFeature1"),
+        t("growthFeature2"),
+        t("growthFeature3"),
+        t("growthFeature4"),
+        t("growthFeature5"),
+      ],
+      isPopular: true,
+      cta: t("growthCta"),
+    },
+    {
+      name: t("enterpriseName"),
+      price: t("enterprisePrice"),
+      description: t("enterpriseDescription"),
+      features: [
+        t("enterpriseFeature1"),
+        t("enterpriseFeature2"),
+        t("enterpriseFeature3"),
+        t("enterpriseFeature4"),
+        t("enterpriseFeature5"),
+      ],
+      isPopular: false,
+      cta: t("enterpriseCta"),
+    },
+  ];
+
+  const testimonials = [
+    {
+      quote: t("testimonial1Quote"),
+      name: t("testimonial1Name"),
+      title: t("testimonial1Title"),
+    },
+    {
+      quote: t("testimonial2Quote"),
+      name: t("testimonial2Name"),
+      title: t("testimonial2Title"),
+    },
+    {
+      quote: t("testimonial3Quote"),
+      name: t("testimonial3Name"),
+      title: t("testimonial3Title"),
+    },
+  ];
+
+  const footerLinks = [t("privacy"), t("terms"), t("security"), t("status")];
+
+  const mockupLabels = [
+    t("pipelineOverview"),
+    t("aiMatchScore"),
+    t("timeToHire"),
+  ];
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Navbar */}
@@ -162,29 +140,30 @@ export default function Home() {
           </Link>
 
           <nav className="hidden items-center gap-6 text-sm text-muted-foreground md:flex">
-            {NAV_LINKS.map(({ label, href }) => (
-              <Link
+            {navLinks.map(({ label, href }) => (
+              <a
                 key={label}
                 href={href}
                 className="transition-colors hover:text-foreground"
               >
                 {label}
-              </Link>
+              </a>
             ))}
           </nav>
 
           <div className="flex items-center gap-3">
+            <LanguageSwitcher />
             <Link
               href="/dashboard"
               className="text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
-              Sign in
+              {t("signIn")}
             </Link>
             <Link
               href="/dashboard"
               className="rounded-full bg-primary px-4 py-1.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
             >
-              Get started
+              {t("getStarted")}
             </Link>
           </div>
         </div>
@@ -195,18 +174,19 @@ export default function Home() {
         <section className="mx-auto max-w-6xl px-6 pb-24 pt-20 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-muted/50 px-3 py-1 text-xs text-muted-foreground">
             <Sparkles className="size-3 text-primary" />
-            AI-native HR platform — now in public beta
+            {t("heroBadge")}
           </div>
 
           <h1 className="mx-auto mt-6 max-w-3xl text-5xl font-semibold leading-tight tracking-tight md:text-6xl">
-            Hire smarter with{" "}
-            <span className="text-primary">AI that works</span> like your best
-            recruiter
+            {t.rich("heroTitle", {
+              highlight: (chunks) => (
+                <span className="text-primary">{chunks}</span>
+              ),
+            })}
           </h1>
 
           <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
-            Owlky automates screening, surfaces top talent, and eliminates
-            busywork — so your HR team can focus on people, not paperwork.
+            {t("heroDescription")}
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -214,14 +194,14 @@ export default function Home() {
               href="/dashboard"
               className="rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
             >
-              Start free trial
+              {t("startFreeTrial")}
             </Link>
-            <Link
+            <a
               href="#how-it-works"
               className="rounded-full border border-border px-6 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-muted/50"
             >
-              See how it works
-            </Link>
+              {t("seeHowItWorks")}
+            </a>
           </div>
 
           {/* Dashboard mockup */}
@@ -232,24 +212,20 @@ export default function Home() {
               <div className="size-2.5 rounded-full bg-border" />
             </div>
             <div className="grid gap-3 p-6 md:grid-cols-3">
-              {["Pipeline overview", "AI match score", "Time-to-hire"].map(
-                (label) => (
-                  <div
-                    key={label}
-                    className="rounded-xl border border-border/40 bg-background p-4"
-                  >
-                    <div className="mb-3 h-2 w-24 rounded-full bg-muted" />
-                    <div className="h-16 rounded-lg bg-muted/50" />
-                    <div className="mt-3 flex items-center gap-2">
-                      <div className="h-2 w-12 rounded-full bg-primary/30" />
-                      <div className="h-2 w-8 rounded-full bg-muted" />
-                    </div>
-                    <p className="mt-3 text-xs text-muted-foreground">
-                      {label}
-                    </p>
+              {mockupLabels.map((label) => (
+                <div
+                  key={label}
+                  className="rounded-xl border border-border/40 bg-background p-4"
+                >
+                  <div className="mb-3 h-2 w-24 rounded-full bg-muted" />
+                  <div className="h-16 rounded-lg bg-muted/50" />
+                  <div className="mt-3 flex items-center gap-2">
+                    <div className="h-2 w-12 rounded-full bg-primary/30" />
+                    <div className="h-2 w-8 rounded-full bg-muted" />
                   </div>
-                ),
-              )}
+                  <p className="mt-3 text-xs text-muted-foreground">{label}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -257,7 +233,7 @@ export default function Home() {
         {/* Stats */}
         <section className="border-y border-border/40 bg-muted/20">
           <div className="mx-auto grid max-w-6xl grid-cols-3 divide-x divide-border/40 px-6 py-12">
-            {STATS.map(({ value, label }) => (
+            {stats.map(({ value, label }) => (
               <div key={label} className="px-6 text-center">
                 <div className="text-3xl font-semibold text-primary">
                   {value}
@@ -274,16 +250,15 @@ export default function Home() {
         <section id="features" className="mx-auto max-w-6xl px-6 py-24">
           <div className="mb-14 text-center">
             <h2 className="text-3xl font-semibold tracking-tight">
-              Everything your HR team needs
+              {t("featuresTitle")}
             </h2>
             <p className="mt-3 text-muted-foreground">
-              One platform to recruit, onboard, and retain — powered by AI at
-              every step.
+              {t("featuresDescription")}
             </p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {FEATURES.map(({ icon: Icon, title, description }) => (
+            {features.map(({ icon: Icon, title, description }) => (
               <div
                 key={title}
                 className="rounded-2xl border border-border/40 bg-card p-6 transition-colors hover:border-border"
@@ -308,15 +283,15 @@ export default function Home() {
           <div className="mx-auto max-w-6xl px-6 py-24">
             <div className="mb-14 text-center">
               <h2 className="text-3xl font-semibold tracking-tight">
-                Up and running in minutes
+                {t("howItWorksTitle")}
               </h2>
               <p className="mt-3 text-muted-foreground">
-                No lengthy setup. No consultants. Just results.
+                {t("howItWorksDescription")}
               </p>
             </div>
 
             <div className="grid gap-8 md:grid-cols-3">
-              {STEPS.map(({ step, title, description }) => (
+              {steps.map(({ step, title, description }) => (
                 <div key={step} className="relative">
                   <div className="mb-4 text-4xl font-bold text-border">
                     {step}
@@ -335,15 +310,15 @@ export default function Home() {
         <section id="pricing" className="mx-auto max-w-6xl px-6 py-24">
           <div className="mb-14 text-center">
             <h2 className="text-3xl font-semibold tracking-tight">
-              Simple, transparent pricing
+              {t("pricingTitle")}
             </h2>
             <p className="mt-3 text-muted-foreground">
-              Start free. Scale when you're ready. Cancel anytime.
+              {t("pricingDescription")}
             </p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
-            {PLANS.map(
+            {plans.map(
               ({ name, price, description, features, isPopular, cta }) => (
                 <div
                   key={name}
@@ -355,7 +330,7 @@ export default function Home() {
                 >
                   {isPopular && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-0.5 text-xs font-medium text-primary-foreground">
-                      Most popular
+                      {t("mostPopular")}
                     </div>
                   )}
                   <div className="mb-4">
@@ -364,7 +339,7 @@ export default function Home() {
                       <span className="text-3xl font-semibold">{price}</span>
                       {price !== "Custom" && (
                         <span className="mb-1 text-sm text-muted-foreground">
-                          / month
+                          {t("perMonth")}
                         </span>
                       )}
                     </div>
@@ -406,18 +381,18 @@ export default function Home() {
           <div className="mx-auto max-w-6xl px-6 py-24">
             <div className="mb-14 text-center">
               <h2 className="text-3xl font-semibold tracking-tight">
-                Loved by HR teams worldwide
+                {t("testimonialsTitle")}
               </h2>
             </div>
 
             <div className="grid gap-6 md:grid-cols-3">
-              {TESTIMONIALS.map(({ quote, name, title }) => (
+              {testimonials.map(({ quote, name, title }) => (
                 <div
                   key={name}
                   className="rounded-2xl border border-border/40 bg-card p-6"
                 >
                   <p className="text-sm leading-relaxed text-muted-foreground">
-                    "{quote}"
+                    &ldquo;{quote}&rdquo;
                   </p>
                   <div className="mt-5 flex items-center gap-3">
                     <div className="flex size-8 items-center justify-center rounded-full bg-primary/10 text-xs font-medium text-primary">
@@ -441,24 +416,23 @@ export default function Home() {
           <div className="rounded-2xl bg-primary/5 border border-primary/20 px-8 py-14 text-center">
             <Globe className="mx-auto mb-4 size-8 text-primary/60" />
             <h2 className="text-3xl font-semibold tracking-tight">
-              Ready to transform your hiring?
+              {t("ctaTitle")}
             </h2>
             <p className="mx-auto mt-3 max-w-md text-muted-foreground">
-              Join hundreds of companies using Owlky to hire faster, smarter,
-              and more fairly.
+              {t("ctaDescription")}
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link
                 href="/dashboard"
                 className="rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
               >
-                Start your free trial
+                {t("startYourFreeTrial")}
               </Link>
               <Link
-                href="#"
+                href="/dashboard"
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
-                Book a demo →
+                {t("bookDemo")}
               </Link>
             </div>
           </div>
@@ -473,13 +447,13 @@ export default function Home() {
               <Sparkles className="size-3 text-primary-foreground" />
             </div>
             <span className="font-medium text-foreground">Owlky</span>
-            <span>© 2026</span>
+            <span>&copy; 2026</span>
           </div>
           <div className="flex gap-6">
-            {["Privacy", "Terms", "Security", "Status"].map((item) => (
+            {footerLinks.map((item) => (
               <Link
                 key={item}
-                href="#"
+                href="/dashboard"
                 className="transition-colors hover:text-foreground"
               >
                 {item}

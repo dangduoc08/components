@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronsUpDown, Plus } from "lucide-react";
+import { useTranslations } from "next-intl";
 import * as React from "react";
 
 import {
@@ -19,17 +20,20 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-export function TeamSwitcher({
-  teams,
-}: {
-  teams: {
-    name: string;
-    logo: React.ElementType;
-    plan: string;
-  }[];
-}) {
+interface ITeam {
+  name: string;
+  logo: React.ElementType;
+  plan: string;
+}
+
+interface ITeamSwitcherProps {
+  teams: ITeam[];
+}
+
+export function TeamSwitcher({ teams }: ITeamSwitcherProps) {
   const { isMobile } = useSidebar();
   const [activeTeam, setActiveTeam] = React.useState(teams[0]);
+  const t = useTranslations("nav");
 
   if (!activeTeam) {
     return null;
@@ -61,7 +65,7 @@ export function TeamSwitcher({
             sideOffset={4}
           >
             <DropdownMenuLabel className="text-muted-foreground text-xs">
-              Teams
+              {t("teams")}
             </DropdownMenuLabel>
             {teams.map((team, index) => (
               <DropdownMenuItem
@@ -81,7 +85,9 @@ export function TeamSwitcher({
               <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">
                 <Plus className="size-4" />
               </div>
-              <div className="text-muted-foreground font-medium">Add team</div>
+              <div className="text-muted-foreground font-medium">
+                {t("addTeam")}
+              </div>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

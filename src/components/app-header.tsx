@@ -2,15 +2,54 @@
 
 import { Bell, Search, Settings, Star, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useEffect, useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
 export function AppHeader() {
   const t = useTranslations("header");
+  const [isScrolled, setIsScrolled] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    function findScrollParent(
+      element: HTMLElement | null,
+    ): HTMLElement | Window {
+      let current = element?.parentElement;
+      while (current) {
+        const { overflow, overflowY } = getComputedStyle(current);
+        if (/(auto|scroll)/.test(overflow + overflowY)) {
+          return current;
+        }
+        current = current.parentElement;
+      }
+      return window;
+    }
+
+    const scrollTarget = findScrollParent(headerRef.current);
+
+    function handleScroll() {
+      const scrollTop =
+        scrollTarget instanceof Window
+          ? scrollTarget.scrollY
+          : scrollTarget.scrollTop;
+      setIsScrolled(scrollTop > 8);
+    }
+
+    scrollTarget.addEventListener("scroll", handleScroll, { passive: true });
+    return () => scrollTarget.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-10 flex h-14 shrink-0 items-center justify-between gap-3 border-b border-border/40 bg-background/95 px-4 backdrop-blur transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
+    <header
+      ref={headerRef}
+      className={`sticky top-0 z-10 flex h-14 shrink-0 items-center justify-between gap-3 border-b px-4 transition-all duration-300 ease-in-out group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 ${
+        isScrolled
+          ? "border-border/40 bg-background/70 shadow-md backdrop-blur-xl saturate-150"
+          : "border-transparent bg-background shadow-none backdrop-blur-none"
+      }`}
+    >
       <div className="flex items-center gap-2">
         <SidebarTrigger className="-ml-1 text-muted-foreground hover:text-foreground" />
 

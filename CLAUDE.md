@@ -35,6 +35,12 @@
   - Use `UPPER_SNAKE_CASE` for true constants.
   - Use descriptive names.
 
+- Interfaces & Types:
+  - Use pattern `<prefix><name>`
+  - Allow prefix:
+    - `I`: inteface
+    - `T`: type
+
 ## Commit Message Convention
 ```
 <type>(<scope>): <short description>
@@ -57,7 +63,7 @@
     - `modify code`
     - `handle logic`
     - `refactor code`
-  - Allowed Types
+  - Allowed types
     - `feat` – new feature
     - `fix` – bug fix
     - `refactor` – internal refactoring (no behavior change)

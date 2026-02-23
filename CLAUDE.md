@@ -10,6 +10,17 @@
 - Avoid patterns that break the Rules of Hooks or mutate state directly, as the compiler requires strict adherence.
 - If a component needs to opt out of the compiler, use the `"use no memo"` directive at the top of the function.
 
+## File Organization Rules
+- All shared constants must be placed in `constants.ts`.
+- All TypeScript `type` definitions must be placed in `types.ts`.
+- All TypeScript `enum` definitions must be placed in `enums.ts`.
+- All non-Props/State interfaces must be placed in `interfaces.ts`.
+- Component Props and State interfaces are allowed inside the component file.
+- Never mix constants, types, and interfaces in the same file.
+- Never define shared types, interfaces, or constants inside component files.
+
+These rules are mandatory and must always be followed when generating or refactoring code.
+
 ## Naming Conventions
 - General Rules:
   - Always use meaningful and descriptive names.

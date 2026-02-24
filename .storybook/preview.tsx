@@ -26,6 +26,11 @@ const preview: Preview = {
   ],
   parameters: {
     backgrounds: { disable: true },
+    options: {
+      storySort: {
+        method: "alphabetical",
+      },
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,

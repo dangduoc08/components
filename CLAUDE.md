@@ -19,6 +19,9 @@
 - Never mix constants, types, and interfaces in the same file.
 - Never define shared types, interfaces, or constants inside component files.
 
+- Provider files must be independent — each provider lives in its own file and must not import other providers.
+- The component that composes providers lives in `index.tsx` of the same folder.
+
 These rules are mandatory and must always be followed when generating or refactoring code.
 
 ## Naming Conventions

@@ -1,21 +1,6 @@
 import type { Decorator, Preview } from "@storybook/nextjs-vite";
-import { useEffect } from "react";
 import { Providers } from "../src/components/providers";
 import "../src/app/globals.css";
-
-const withTheme: Decorator = (Story, context) => {
-  const theme = context.globals.theme ?? "light";
-
-  document.documentElement.classList.remove("light", "dark");
-  document.documentElement.classList.add(theme);
-
-  useEffect(() => {
-    document.documentElement.classList.remove("light", "dark");
-    document.documentElement.classList.add(theme);
-  }, [theme]);
-
-  return <Story />;
-};
 
 const preview: Preview = {
   globalTypes: {
@@ -33,12 +18,11 @@ const preview: Preview = {
     },
   },
   decorators: [
-    withTheme,
-    (Story) => (
-      <Providers>
+    ((Story, context) => (
+      <Providers forcedTheme={context.globals.theme ?? "light"}>
         <Story />
       </Providers>
-    ),
+    )) satisfies Decorator,
   ],
   parameters: {
     backgrounds: { disable: true },

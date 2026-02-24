@@ -3,11 +3,12 @@ import { TooltipProvider } from "./tooltip-provider";
 
 interface IProvidersProps {
   children: React.ReactNode;
+  forcedTheme?: string;
 }
 
-function Providers({ children }: IProvidersProps) {
+function Providers({ children, forcedTheme }: IProvidersProps) {
   return (
-    <ThemeProvider>
+    <ThemeProvider forcedTheme={forcedTheme}>
       <TooltipProvider>{children}</TooltipProvider>
     </ThemeProvider>
   );

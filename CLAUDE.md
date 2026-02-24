@@ -24,6 +24,11 @@
 
 These rules are mandatory and must always be followed when generating or refactoring code.
 
+## Code Style Rules
+- Do NOT add comments to generated code unless the logic is genuinely non-obvious and cannot be made clear through naming alone.
+- Never add comments that describe what the code does — the code itself should be self-explanatory.
+- Never add JSDoc, docstrings, or block comments to functions, components, or files.
+
 ## Naming Conventions
 - General Rules:
   - Always use meaningful and descriptive names.

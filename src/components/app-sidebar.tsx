@@ -2,21 +2,15 @@
 
 import {
   AudioWaveform,
-  BookOpen,
-  Bot,
+  Briefcase,
   Command,
-  Frame,
   GalleryVerticalEnd,
-  Map as MapIcon,
-  PieChart,
-  Settings2,
-  SquareTerminal,
+  ScanSearch,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import type * as React from "react";
 
 import { NavMain } from "@/components/nav/nav-main";
-import { NavProjects } from "@/components/nav/nav-projects";
 import { NavUser } from "@/components/nav/nav-user";
 import { TeamSwitcher } from "@/components/nav/team-switcher";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -44,53 +38,22 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     ],
     navMain: [
       {
-        title: t("playground"),
+        title: t("job"),
         url: "#",
-        icon: SquareTerminal,
+        icon: Briefcase,
         isActive: true,
         items: [
-          { title: t("history"), url: "#" },
-          { title: t("starred"), url: "#" },
-          { title: t("settings"), url: "#" },
+          { title: t("jobList"), url: "/dashboard/job/list" },
+          { title: t("jobCreate"), url: "/dashboard/job/create" },
+          { title: t("jobEdit"), url: "/dashboard/job/edit" },
+          { title: t("jobDelete"), url: "/dashboard/job/delete" },
         ],
       },
       {
-        title: t("models"),
-        url: "#",
-        icon: Bot,
-        items: [
-          { title: t("genesis"), url: "#" },
-          { title: t("explorer"), url: "#" },
-          { title: t("quantum"), url: "#" },
-        ],
+        title: t("cvAnalysis"),
+        url: "/dashboard/cv-analysis",
+        icon: ScanSearch,
       },
-      {
-        title: t("documentation"),
-        url: "#",
-        icon: BookOpen,
-        items: [
-          { title: t("introduction"), url: "#" },
-          { title: t("getStarted"), url: "#" },
-          { title: t("tutorials"), url: "#" },
-          { title: t("changelog"), url: "#" },
-        ],
-      },
-      {
-        title: t("settings"),
-        url: "#",
-        icon: Settings2,
-        items: [
-          { title: t("general"), url: "#" },
-          { title: t("team"), url: "#" },
-          { title: t("billing"), url: "#" },
-          { title: t("limits"), url: "#" },
-        ],
-      },
-    ],
-    projects: [
-      { name: t("designEngineering"), url: "#", icon: Frame },
-      { name: t("salesMarketing"), url: "#", icon: PieChart },
-      { name: t("travel"), url: "#", icon: MapIcon },
     ],
   };
 
@@ -101,7 +64,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
       </SidebarContent>
       <SidebarFooter>
         <ThemeToggle />

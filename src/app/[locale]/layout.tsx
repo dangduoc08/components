@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { Providers } from "@/components/providers";
+import { DEFAULT_SHADCN_THEME } from "@/components/providers/constants";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
 
@@ -44,6 +45,13 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
+      <head>
+        <link
+          id="shadcn-theme-stylesheet"
+          rel="stylesheet"
+          href={`/themes/${DEFAULT_SHADCN_THEME}.css`}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

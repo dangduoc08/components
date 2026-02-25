@@ -3,6 +3,7 @@
 import { Bell, Search, Settings, Star, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { SidebarTrigger } from "@/components/ui/sidebar";
@@ -100,6 +101,8 @@ export function AppHeader() {
           <Users className="size-4" />
           <span className="sr-only">{t("team")}</span>
         </Button>
+
+        <ThemeSwitcher />
 
         {/* Settings */}
         <div className="relative">

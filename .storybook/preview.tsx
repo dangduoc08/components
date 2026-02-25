@@ -1,5 +1,19 @@
+/// <reference types="vite/client" />
 import type { Decorator, Preview } from "@storybook/nextjs-vite";
 import { Providers } from "../src/components/providers";
+
+const themeFiles = import.meta.glob("../src/themes/*.css");
+
+const themeItems = Object.keys(themeFiles)
+  .map((filePath) => {
+    const slug = (filePath.split("/").pop() ?? "").replace(".css", "");
+    const title = slug
+      .split("-")
+      .map((word) => word[0].toUpperCase() + word.slice(1))
+      .join(" ");
+    return { value: slug, title };
+  })
+  .sort((a, b) => a.value.localeCompare(b.value));
 
 const preview: Preview = {
   globalTypes: {
@@ -17,14 +31,9 @@ const preview: Preview = {
     },
     theme: {
       name: "Theme",
-      defaultValue: "amber-minimal",
+      defaultValue: themeItems[0]?.value ?? "",
       toolbar: {
-        items: [
-          { value: "amber-minimal", title: "Amber Minimal" },
-          { value: "amethyst-haze", title: "Amethyst Haze" },
-          { value: "art-deco", title: "Art Deco" },
-          { value: "blue", title: "Blue" },
-        ],
+        items: themeItems,
         dynamicTitle: true,
       },
     },

@@ -137,7 +137,7 @@ export const Cards: Story = {
         <label
           key={value}
           htmlFor={`plan-${value}`}
-          className="border-border has-[[data-state=checked]]:border-primary flex cursor-pointer items-center gap-3 rounded-lg border p-4"
+          className="border-border has-data-[state=checked]:border-primary flex cursor-pointer items-center gap-3 rounded-lg border p-4"
         >
           <RadioGroupItem value={value} id={`plan-${value}`} />
           <div className="flex flex-1 items-center justify-between">

@@ -1,7 +1,6 @@
 "use client";
 
 import { Palette } from "lucide-react";
-import { SHADCN_THEMES } from "@/components/providers/constants";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -10,10 +9,10 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useShadcnTheme } from "@/hooks/use-shadcn-theme";
+import { useTheme } from "@/hooks/use-theme";
 
 export function ThemeSwitcher() {
-  const { theme, setTheme } = useShadcnTheme();
+  const { theme, setTheme, themes } = useTheme();
 
   return (
     <DropdownMenu>
@@ -29,7 +28,7 @@ export function ThemeSwitcher() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-44">
         <DropdownMenuRadioGroup value={theme} onValueChange={setTheme}>
-          {SHADCN_THEMES.map((t) => (
+          {themes.map((t) => (
             <DropdownMenuRadioItem key={t.value} value={t.value}>
               <span
                 className="size-3 rounded-full border border-black/10"

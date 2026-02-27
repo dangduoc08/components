@@ -1,7 +1,7 @@
-type TShadcnTheme = {
+type TTheme = {
   value: string;
   label: string;
   color: string;
 };
 
-export type { TShadcnTheme };
+export type { TTheme };

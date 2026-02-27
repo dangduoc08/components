@@ -1,4 +1,5 @@
-import { ShadcnThemeProvider } from "./shadcn-theme-provider";
+import { getThemes } from "@/lib/themes";
+import { AppearanceProvider } from "./appearance-provider";
 import { ThemeProvider } from "./theme-provider";
 import { TooltipProvider } from "./tooltip-provider";
 
@@ -8,12 +9,14 @@ interface IProvidersProps {
 }
 
 function Providers({ children, forcedTheme }: IProvidersProps) {
+  const themes = getThemes();
+
   return (
-    <ShadcnThemeProvider>
-      <ThemeProvider forcedTheme={forcedTheme}>
+    <ThemeProvider themes={themes}>
+      <AppearanceProvider forcedTheme={forcedTheme}>
         <TooltipProvider>{children}</TooltipProvider>
-      </ThemeProvider>
-    </ShadcnThemeProvider>
+      </AppearanceProvider>
+    </ThemeProvider>
   );
 }
 

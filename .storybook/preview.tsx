@@ -1,19 +1,10 @@
 /// <reference types="vite/client" />
 import type { Decorator, Preview } from "@storybook/nextjs-vite";
 import { Providers } from "../src/components/providers";
+import type { TTheme } from "../src/components/providers/types";
 
-const themeFiles = import.meta.glob("../src/themes/*.css");
-
-const themeItems = Object.keys(themeFiles)
-  .map((filePath) => {
-    const slug = (filePath.split("/").pop() ?? "").replace(".css", "");
-    const title = slug
-      .split("-")
-      .map((word) => word[0].toUpperCase() + word.slice(1))
-      .join(" ");
-    return { value: slug, title };
-  })
-  .sort((a, b) => a.value.localeCompare(b.value));
+declare const __STORYBOOK_THEMES__: TTheme[];
+const themes = __STORYBOOK_THEMES__;
 
 const preview: Preview = {
   globalTypes: {
@@ -31,16 +22,19 @@ const preview: Preview = {
     },
     theme: {
       name: "Theme",
-      defaultValue: themeItems[0]?.value ?? "",
+      defaultValue: themes[0]?.value ?? "",
       toolbar: {
-        items: themeItems,
+        items: themes.map((t) => ({ value: t.value, title: t.label })),
         dynamicTitle: true,
       },
     },
   },
   decorators: [
     ((Story, context) => (
-      <Providers forcedTheme={context.globals.appearance ?? "light"}>
+      <Providers
+        forcedTheme={context.globals.appearance ?? "light"}
+        themes={themes}
+      >
         <Story />
       </Providers>
     )) satisfies Decorator,
@@ -48,22 +42,26 @@ const preview: Preview = {
       const theme = context.globals.theme;
 
       if (typeof document !== "undefined") {
-        document.getElementById("shadcn-theme")?.remove();
-
-        if (!document.getElementById("shadcn-theme-fonts")) {
+        if (!document.getElementById("theme-fonts")) {
           const fontsLink = document.createElement("link");
-          fontsLink.id = "shadcn-theme-fonts";
+          fontsLink.id = "theme-fonts";
           fontsLink.rel = "stylesheet";
           fontsLink.href =
             "https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&family=Geist+Mono:wght@400;500&display=swap";
           document.head.appendChild(fontsLink);
         }
 
-        const themeLink = document.createElement("link");
-        themeLink.id = "shadcn-theme";
-        themeLink.rel = "stylesheet";
-        themeLink.href = `/src/themes/${theme}.css`;
-        document.head.appendChild(themeLink);
+        const existing = document.getElementById("theme-stylesheet");
+        const href = `/themes/${theme}.css`;
+
+        if (existing?.getAttribute("href") !== href) {
+          existing?.remove();
+          const themeLink = document.createElement("link");
+          themeLink.id = "theme-stylesheet";
+          themeLink.rel = "stylesheet";
+          themeLink.href = href;
+          document.head.appendChild(themeLink);
+        }
       }
 
       return <Story />;

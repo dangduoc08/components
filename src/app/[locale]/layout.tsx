@@ -6,6 +6,7 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { Providers } from "@/components/providers";
 import { DEFAULT_THEME } from "@/components/providers/constants";
 import { routing } from "@/i18n/routing";
+import { getThemes } from "@/lib/themes";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -42,6 +43,7 @@ export default async function RootLayout({
 
   setRequestLocale(locale);
   const messages = await getMessages();
+  const themes = getThemes();
 
   return (
     <html lang={locale} suppressHydrationWarning>
@@ -56,7 +58,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
-          <Providers>{children}</Providers>
+          <Providers themes={themes}>{children}</Providers>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -2,6 +2,7 @@
 import type { Decorator, Preview } from "@storybook/nextjs-vite";
 import { Providers } from "../src/components/providers";
 import type { TTheme } from "../src/components/providers/types";
+import "../src/app/globals.css";
 
 declare const __STORYBOOK_THEMES__: TTheme[];
 const themes = __STORYBOOK_THEMES__;

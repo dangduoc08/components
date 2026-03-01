@@ -1,22 +1,26 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Roboto, Roboto_Mono, Roboto_Serif } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { Providers } from "@/components/providers";
-import { DEFAULT_THEME } from "@/components/providers/constants";
+// import { DEFAULT_THEME } from "@/components/providers/constants";
 import { routing } from "@/i18n/routing";
-import { getThemes } from "@/lib/themes";
 import "../globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const fontSans = Roboto({
   subsets: ["latin"],
+  variable: "--font-sans",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const fontSerif = Roboto_Serif({
   subsets: ["latin"],
+  variable: "--font-serif",
+});
+
+const fontMono = Roboto_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
@@ -43,22 +47,16 @@ export default async function RootLayout({
 
   setRequestLocale(locale);
   const messages = await getMessages();
-  const themes = getThemes();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <head>
-        <link
-          id="theme-stylesheet"
-          rel="stylesheet"
-          href={`/themes/${DEFAULT_THEME}.css`}
-        />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html
+      className={`${fontSans.variable} ${fontSerif.variable} ${fontMono.variable} antialiased`}
+      lang={locale}
+      suppressHydrationWarning
+    >
+      <body>
         <NextIntlClientProvider messages={messages}>
-          <Providers themes={themes}>{children}</Providers>
+          <Providers>{children}</Providers>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -1,6 +1,6 @@
 "use client";
 
-import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { ThemeProvider } from "next-themes";
 
 interface IAppearanceProviderProps {
   children: React.ReactNode;
@@ -12,14 +12,15 @@ function AppearanceProvider({
   forcedTheme,
 }: IAppearanceProviderProps) {
   return (
-    <NextThemesProvider
+    <ThemeProvider
       attribute="class"
       defaultTheme="system"
       enableSystem
       forcedTheme={forcedTheme}
+      storageKey="appearance"
     >
       {children}
-    </NextThemesProvider>
+    </ThemeProvider>
   );
 }
 

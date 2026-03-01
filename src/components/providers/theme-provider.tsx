@@ -1,16 +1,12 @@
 "use client";
 
 import { createContext, useEffect, useState } from "react";
-import {
-  DEFAULT_THEME,
-  THEME_STORAGE_KEY,
-  THEME_STYLESHEET_ID,
-} from "./constants";
+import { THEME_STORAGE_KEY, THEME_STYLESHEET_ID } from "./constants";
 import type { IThemeContext } from "./interfaces";
 import type { TTheme } from "./types";
 
 const ThemeContext = createContext<IThemeContext>({
-  theme: DEFAULT_THEME,
+  theme: "",
   setTheme: () => {},
   themes: [],
 });
@@ -21,7 +17,7 @@ interface IThemeProviderProps {
 }
 
 function ThemeProvider({ children, themes }: IThemeProviderProps) {
-  const [theme, setThemeState] = useState(DEFAULT_THEME);
+  const [theme, setThemeState] = useState(themes[0].value);
 
   useEffect(() => {
     const stored = localStorage.getItem(THEME_STORAGE_KEY);

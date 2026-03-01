@@ -1,15 +1,16 @@
+import { getThemes } from "@/lib/themes";
 import { AppearanceProvider } from "./appearance-provider";
 import { ThemeProvider } from "./theme-provider";
 import { TooltipProvider } from "./tooltip-provider";
-import type { TTheme } from "./types";
 
 interface IProvidersProps {
   children: React.ReactNode;
   forcedTheme?: string;
-  themes?: TTheme[];
 }
 
-function Providers({ children, forcedTheme, themes = [] }: IProvidersProps) {
+function Providers({ children, forcedTheme }: IProvidersProps) {
+  const themes = getThemes();
+
   return (
     <ThemeProvider themes={themes}>
       <AppearanceProvider forcedTheme={forcedTheme}>

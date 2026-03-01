@@ -1,8 +1,7 @@
-import { AppHeader } from "@/components/app-header";
 import { AppSidebar } from "@/components/app-sidebar";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
-const COLORS = [
+const _COLORS = [
   "bg-red-200 dark:bg-red-900/40",
   "bg-blue-200 dark:bg-blue-900/40",
   "bg-green-200 dark:bg-green-900/40",
@@ -17,7 +16,7 @@ const COLORS = [
   "bg-rose-200 dark:bg-rose-900/40",
 ];
 
-const ROWS = [
+const _ROWS = [
   "row-1",
   "row-2",
   "row-3",
@@ -36,7 +35,7 @@ export default function Page() {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset>
+      {/* <SidebarInset>
         <AppHeader />
         <div className="flex flex-1 flex-col gap-6 p-4">
           <div className="grid gap-4 md:grid-cols-3">
@@ -56,7 +55,7 @@ export default function Page() {
             </div>
           ))}
         </div>
-      </SidebarInset>
+      </SidebarInset> */}
     </SidebarProvider>
   );
 }

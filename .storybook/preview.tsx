@@ -34,7 +34,7 @@ const preview: Preview = {
     ((Story, context) => (
       <Providers
         forcedTheme={context.globals.appearance ?? "light"}
-        themes={themes}
+        // themes={themes}
       >
         <Story />
       </Providers>

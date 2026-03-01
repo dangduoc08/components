@@ -1,27 +1,51 @@
-import { existsSync, readFileSync } from "node:fs";
-import { join } from "node:path";
-import type { NextRequest } from "next/server";
+import fs from "node:fs";
+import path from "node:path";
 import { NextResponse } from "next/server";
-import { extractThemeVariables } from "@/lib/extract-theme-variables";
+
+const MAX_FILE_SIZE_BYTES = 50 * 1024;
+
+const THEMES_DIR = path.join(process.cwd(), "src/themes");
+const RESOLVED_THEMES_DIR = fs.realpathSync(THEMES_DIR);
+
+const THEME_CACHE: ReadonlyMap<string, string> = new Map(
+  fs
+    .readdirSync(RESOLVED_THEMES_DIR)
+    .filter((file) => /^[a-z0-9-]+\.css$/.test(file))
+    .flatMap((file) => {
+      const resolvedPath = fs.realpathSync(
+        path.join(RESOLVED_THEMES_DIR, file),
+      );
+
+      if (!resolvedPath.startsWith(RESOLVED_THEMES_DIR + path.sep)) return [];
+
+      const stat = fs.statSync(resolvedPath);
+
+      if (!stat.isFile() || stat.size > MAX_FILE_SIZE_BYTES) return [];
+
+      return [
+        [file.slice(0, -4), fs.readFileSync(resolvedPath, "utf-8")] as const,
+      ];
+    }),
+);
 
 export async function GET(
-  _: NextRequest,
+  _req: Request,
   { params }: { params: Promise<{ theme: string }> },
 ) {
   const { theme } = await params;
-  const themeName = theme.replace(/\.css$/, "");
-  const filePath = join(process.cwd(), "src/themes", `${themeName}.css`);
+  const themeName =
+    typeof theme === "string" ? theme.replace(/\.css$/i, "") : "";
+  const content = THEME_CACHE.get(themeName);
 
-  if (!existsSync(filePath)) {
-    return new NextResponse("Not found", { status: 404 });
+  if (!content) {
+    return new NextResponse(null, { status: 404 });
   }
 
-  const css = extractThemeVariables(readFileSync(filePath, "utf-8"));
-
-  return new NextResponse(css, {
+  return new NextResponse(content, {
     headers: {
-      "Content-Type": "text/css",
-      "Cache-Control": "public, max-age=31536000, immutable",
+      "Content-Type": "text/css; charset=utf-8",
+      "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+      "X-Content-Type-Options": "nosniff",
     },
   });
 }

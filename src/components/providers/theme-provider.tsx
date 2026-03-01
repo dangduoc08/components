@@ -1,9 +1,9 @@
 "use client";
 
-import { createContext, useEffect, useState } from "react";
-import { THEME_STORAGE_KEY, THEME_STYLESHEET_ID } from "./constants";
+import { createContext, useEffect, useRef, useState } from "react";
+import { SETTINGS_STORAGE_KEY, THEME_STYLESHEET_ID } from "./constants";
 import type { IThemeContext } from "./interfaces";
-import type { TTheme } from "./types";
+import type { TSettings, TTheme } from "./types";
 
 const ThemeContext = createContext<IThemeContext>({
   theme: "",
@@ -18,10 +18,15 @@ interface IThemeProviderProps {
 
 function ThemeProvider({ children, themes }: IThemeProviderProps) {
   const [theme, setThemeState] = useState(themes[0].value);
+  const isInitialized = useRef(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem(THEME_STORAGE_KEY);
-    if (stored) setThemeState(stored);
+    try {
+      const raw = localStorage.getItem(SETTINGS_STORAGE_KEY);
+      const settings = raw ? (JSON.parse(raw) as Partial<TSettings>) : {};
+      if (settings.theme) setThemeState(settings.theme);
+    } catch {}
+    isInitialized.current = true;
   }, []);
 
   useEffect(() => {
@@ -37,7 +42,16 @@ function ThemeProvider({ children, themes }: IThemeProviderProps) {
       document.head.appendChild(link);
     }
 
-    localStorage.setItem(THEME_STORAGE_KEY, theme);
+    if (!isInitialized.current) return;
+
+    try {
+      const raw = localStorage.getItem(SETTINGS_STORAGE_KEY);
+      const settings = raw ? (JSON.parse(raw) as Partial<TSettings>) : {};
+      localStorage.setItem(
+        SETTINGS_STORAGE_KEY,
+        JSON.stringify({ ...settings, theme }),
+      );
+    } catch {}
   }, [theme]);
 
   function setTheme(newTheme: string) {

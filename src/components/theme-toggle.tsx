@@ -2,15 +2,15 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
+import { useAppearance } from "@/hooks/use-appearance";
 
 export function ThemeToggle() {
-  const { resolvedTheme, setTheme } = useTheme();
+  const { appearance, setAppearance } = useAppearance();
   const t = useTranslations("common");
 
   function toggleTheme() {
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+    setAppearance(appearance === "dark" ? "light" : "dark");
   }
 
   return (

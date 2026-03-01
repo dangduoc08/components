@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Roboto, Roboto_Mono, Roboto_Serif } from "next/font/google";
 import { notFound } from "next/navigation";
-import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { hasLocale } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { Providers } from "@/components/providers";
-// import { DEFAULT_THEME } from "@/components/providers/constants";
 import { routing } from "@/i18n/routing";
+import { getThemes } from "@/lib/themes";
 import "../globals.css";
 
 const fontSans = Roboto({
@@ -47,6 +47,7 @@ export default async function RootLayout({
 
   setRequestLocale(locale);
   const messages = await getMessages();
+  const themes = getThemes();
 
   return (
     <html
@@ -55,9 +56,9 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body>
-        <NextIntlClientProvider messages={messages}>
-          <Providers>{children}</Providers>
-        </NextIntlClientProvider>
+        <Providers locale={locale} messages={messages} themes={themes}>
+          {children}
+        </Providers>
       </body>
     </html>
   );

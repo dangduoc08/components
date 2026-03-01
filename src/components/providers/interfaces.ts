@@ -1,4 +1,4 @@
-import type { TTheme } from "./types";
+import type { TAppearance, TTheme } from "./types";
 
 interface IThemeContext {
   theme: string;
@@ -6,4 +6,9 @@ interface IThemeContext {
   themes: TTheme[];
 }
 
-export type { IThemeContext };
+interface IAppearanceContext {
+  appearance: TAppearance;
+  setAppearance: (appearance: TAppearance) => void;
+}
+
+export type { IThemeContext, IAppearanceContext };

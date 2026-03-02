@@ -1,7 +1,8 @@
 "use client";
 
 import { createContext, useEffect, useRef, useState } from "react";
-import { SETTINGS_STORAGE_KEY, THEME_STYLESHEET_ID } from "./constants";
+import { applyThemeStylesheet } from "@/lib/utils";
+import { SETTINGS_STORAGE_KEY } from "./constants";
 import type { IThemeContext } from "./interfaces";
 import type { TSettings, TTheme } from "./types";
 
@@ -17,7 +18,7 @@ interface IThemeProviderProps {
 }
 
 function ThemeProvider({ children, themes }: IThemeProviderProps) {
-  const [theme, setThemeState] = useState(themes[0].value);
+  const [theme, setThemeState] = useState("");
   const isInitialized = useRef(false);
 
   useEffect(() => {
@@ -30,17 +31,7 @@ function ThemeProvider({ children, themes }: IThemeProviderProps) {
   }, []);
 
   useEffect(() => {
-    const existing = document.getElementById(THEME_STYLESHEET_ID);
-    const href = `/themes/${theme}.css`;
-
-    if (existing?.getAttribute("href") !== href) {
-      existing?.remove();
-      const link = document.createElement("link");
-      link.id = THEME_STYLESHEET_ID;
-      link.rel = "stylesheet";
-      link.href = href;
-      document.head.appendChild(link);
-    }
+    applyThemeStylesheet(`/themes/${theme}.css`);
 
     if (!isInitialized.current) return;
 

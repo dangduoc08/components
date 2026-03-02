@@ -1,8 +1,19 @@
 /// <reference types="vite/client" />
 import type { Decorator, Preview } from "@storybook/nextjs-vite";
-import { Providers } from "../src/components/providers";
+import { Roboto, Roboto_Mono, Roboto_Serif } from "next/font/google";
+import { AppearanceProvider } from "../src/components/providers/appearance-provider";
+import { FontProvider } from "../src/components/providers/font-provider";
 import type { TTheme } from "../src/components/providers/types";
+import { TooltipProvider } from "../src/components/ui/tooltip";
+import { applyThemeStylesheet } from "../src/lib/utils";
 import "../src/app/globals.css";
+
+const fontSans = Roboto({ subsets: ["latin"], variable: "--font-sans" });
+const fontSerif = Roboto_Serif({
+  subsets: ["latin"],
+  variable: "--font-serif",
+});
+const fontMono = Roboto_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 declare const __STORYBOOK_THEMES__: TTheme[];
 const themes = __STORYBOOK_THEMES__;
@@ -32,37 +43,26 @@ const preview: Preview = {
   },
   decorators: [
     ((Story, context) => (
-      <Providers
-        forcedTheme={context.globals.appearance ?? "light"}
-        // themes={themes}
+      <FontProvider
+        variables={[
+          fontSans.variable,
+          fontSerif.variable,
+          fontMono.variable,
+          "antialiased",
+        ]}
       >
-        <Story />
-      </Providers>
+        <AppearanceProvider
+          forcedAppearance={context.globals.appearance ?? "light"}
+        >
+          <TooltipProvider>
+            <Story />
+          </TooltipProvider>
+        </AppearanceProvider>
+      </FontProvider>
     )) satisfies Decorator,
     ((Story, context) => {
-      const theme = context.globals.theme;
-
       if (typeof document !== "undefined") {
-        if (!document.getElementById("theme-fonts")) {
-          const fontsLink = document.createElement("link");
-          fontsLink.id = "theme-fonts";
-          fontsLink.rel = "stylesheet";
-          fontsLink.href =
-            "https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&family=Geist+Mono:wght@400;500&display=swap";
-          document.head.appendChild(fontsLink);
-        }
-
-        const existing = document.getElementById("theme-stylesheet");
-        const href = `/themes/${theme}.css`;
-
-        if (existing?.getAttribute("href") !== href) {
-          existing?.remove();
-          const themeLink = document.createElement("link");
-          themeLink.id = "theme-stylesheet";
-          themeLink.rel = "stylesheet";
-          themeLink.href = href;
-          document.head.appendChild(themeLink);
-        }
+        applyThemeStylesheet(`/${context.globals.theme}.css`);
       }
 
       return <Story />;

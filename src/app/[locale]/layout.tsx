@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { Providers } from "@/components/providers";
+import { FontProvider } from "@/components/providers/font-provider";
 import { routing } from "@/i18n/routing";
 import { getThemes } from "@/lib/themes";
 import "../globals.css";
@@ -50,15 +51,20 @@ export default async function RootLayout({
   const themes = getThemes();
 
   return (
-    <html
-      className={`${fontSans.variable} ${fontSerif.variable} ${fontMono.variable} antialiased`}
-      lang={locale}
-      suppressHydrationWarning
-    >
+    <html lang={locale} suppressHydrationWarning>
       <body>
-        <Providers locale={locale} messages={messages} themes={themes}>
-          {children}
-        </Providers>
+        <FontProvider
+          variables={[
+            fontSans.variable,
+            fontSerif.variable,
+            fontMono.variable,
+            "antialiased",
+          ]}
+        >
+          <Providers locale={locale} messages={messages} themes={themes}>
+            {children}
+          </Providers>
+        </FontProvider>
       </body>
     </html>
   );

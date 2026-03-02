@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import type { TTheme } from "@/components/providers/types";
+import type { TTheme } from "./types";
 
 function getThemes(): TTheme[] {
   const themesDir = path.join(process.cwd(), "src/themes");

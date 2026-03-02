@@ -71,7 +71,6 @@ export function JobCreateProperties() {
 
       {isOpen && (
         <div className="flex flex-col gap-6 px-6 pb-6">
-          {/* Employment Type */}
           <div className="flex flex-col gap-3">
             <Label className="font-semibold">{t("employmentType")}</Label>
             <div className="flex flex-wrap items-center gap-4">
@@ -88,8 +87,6 @@ export function JobCreateProperties() {
               ))}
             </div>
           </div>
-
-          {/* Experience */}
           <div className="flex flex-col gap-3">
             <Label className="font-semibold">{t("experience")}</Label>
             <RadioGroup
@@ -109,8 +106,6 @@ export function JobCreateProperties() {
               ))}
             </RadioGroup>
           </div>
-
-          {/* Role */}
           <div className="flex flex-col gap-2">
             <Label className="font-semibold">{t("role")}</Label>
             <Select defaultValue="CTO">
@@ -126,8 +121,6 @@ export function JobCreateProperties() {
               </SelectContent>
             </Select>
           </div>
-
-          {/* Skills */}
           <div className="flex flex-col gap-2">
             <Label className="font-semibold">{t("skills")}</Label>
             <Select>
@@ -143,8 +136,6 @@ export function JobCreateProperties() {
               </SelectContent>
             </Select>
           </div>
-
-          {/* Working Schedule */}
           <div className="flex flex-col gap-2">
             <Label className="font-semibold">{t("workingSchedule")}</Label>
             <Select>
@@ -160,8 +151,6 @@ export function JobCreateProperties() {
               </SelectContent>
             </Select>
           </div>
-
-          {/* Locations */}
           <div className="flex flex-col gap-2">
             <Label className="font-semibold">{t("locations")}</Label>
             <Select>
@@ -177,8 +166,6 @@ export function JobCreateProperties() {
               </SelectContent>
             </Select>
           </div>
-
-          {/* Expired */}
           <div className="flex flex-col gap-2">
             <Label className="font-semibold">{t("expired")}</Label>
             <div className="relative">
@@ -186,8 +173,6 @@ export function JobCreateProperties() {
               <Calendar className="absolute right-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
             </div>
           </div>
-
-          {/* Salary */}
           <div className="flex flex-col gap-4">
             <Label className="font-semibold">{t("salary")}</Label>
 
@@ -230,8 +215,6 @@ export function JobCreateProperties() {
               </Label>
             </div>
           </div>
-
-          {/* Benefits */}
           <div className="flex flex-col gap-3">
             <Label className="font-semibold">{t("benefits")}</Label>
             <div className="grid grid-cols-2 gap-3">

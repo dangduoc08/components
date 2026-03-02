@@ -36,7 +36,6 @@ export function JobCard({ job }: IJobCardProps) {
 
   return (
     <div className="group relative flex flex-col rounded-xl border border-border/50 bg-card p-5 transition-colors hover:border-border">
-      {/* Header: Logo + Menu */}
       <div className="flex items-start justify-between">
         <Avatar className="size-12 rounded-lg">
           <AvatarImage src={job.companyLogo} alt={job.title} />
@@ -64,8 +63,6 @@ export function JobCard({ job }: IJobCardProps) {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-
-      {/* Title + Meta */}
       <div className="mt-4 flex flex-col gap-1.5">
         <h3 className="text-sm font-semibold leading-tight">{job.title}</h3>
         <p className="text-xs text-muted-foreground">
@@ -76,8 +73,6 @@ export function JobCard({ job }: IJobCardProps) {
           <span>{t("candidates", { count: job.candidateCount })}</span>
         </div>
       </div>
-
-      {/* Tags */}
       <div className="mt-auto grid grid-cols-2 gap-x-4 gap-y-2.5 border-t border-border/50 pt-4 mt-5">
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <BarChart3 className="size-3.5 shrink-0" />

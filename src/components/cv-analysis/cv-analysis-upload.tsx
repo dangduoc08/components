@@ -26,8 +26,6 @@ export function CvAnalysisUpload() {
           {t("newAnalysisDescription")}
         </p>
       </div>
-
-      {/* Target Job Position */}
       <div className="rounded-xl border border-border/50 bg-card p-5">
         <h2 className="mb-3 text-sm font-semibold">{t("targetJobPosition")}</h2>
         <Select defaultValue={TARGET_JOBS[0].id}>
@@ -60,12 +58,8 @@ export function CvAnalysisUpload() {
           </span>
         </div>
       </div>
-
-      {/* Candidate CV */}
       <div className="rounded-xl border border-border/50 bg-card p-5">
         <h2 className="mb-3 text-sm font-semibold">{t("candidateCV")}</h2>
-
-        {/* Upload Area */}
         <div className="flex flex-col items-center gap-3 rounded-lg border-2 border-dashed border-border/50 px-6 py-10 text-center transition-colors hover:border-primary/30">
           <div className="flex size-12 items-center justify-center rounded-full bg-primary/10">
             <CloudUpload className="size-6 text-primary" />
@@ -80,8 +74,6 @@ export function CvAnalysisUpload() {
             {t("browseFiles")}
           </Button>
         </div>
-
-        {/* Uploaded File */}
         <div className="mt-4 flex items-center gap-3 rounded-lg border border-border/50 p-3">
           <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-red-100 dark:bg-red-950">
             <FileText className="size-5 text-red-500" />
@@ -99,8 +91,6 @@ export function CvAnalysisUpload() {
           </Button>
         </div>
       </div>
-
-      {/* Analyze Button */}
       <Button size="lg" className="w-full gap-2">
         <Sparkles className="size-4" />
         {t("analyzeWithAI")}

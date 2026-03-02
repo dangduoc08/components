@@ -129,7 +129,6 @@ export default async function Home({
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Navbar */}
       <header className="sticky top-0 z-50 border-b border-border/40 bg-background/95 backdrop-blur">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
           <Link href="/" className="flex items-center gap-2">
@@ -170,7 +169,6 @@ export default async function Home({
       </header>
 
       <main>
-        {/* Hero */}
         <section className="mx-auto max-w-6xl px-6 pb-24 pt-20 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-muted/50 px-3 py-1 text-xs text-muted-foreground">
             <Sparkles className="size-3 text-primary" />
@@ -203,8 +201,6 @@ export default async function Home({
               {t("seeHowItWorks")}
             </a>
           </div>
-
-          {/* Dashboard mockup */}
           <div className="mt-16 overflow-hidden rounded-2xl border border-border/60 bg-muted/30 shadow-lg">
             <div className="flex items-center gap-1.5 border-b border-border/40 px-4 py-3">
               <div className="size-2.5 rounded-full bg-border" />
@@ -229,8 +225,6 @@ export default async function Home({
             </div>
           </div>
         </section>
-
-        {/* Stats */}
         <section className="border-y border-border/40 bg-muted/20">
           <div className="mx-auto grid max-w-6xl grid-cols-3 divide-x divide-border/40 px-6 py-12">
             {stats.map(({ value, label }) => (
@@ -245,8 +239,6 @@ export default async function Home({
             ))}
           </div>
         </section>
-
-        {/* Features */}
         <section id="features" className="mx-auto max-w-6xl px-6 py-24">
           <div className="mb-14 text-center">
             <h2 className="text-3xl font-semibold tracking-tight">
@@ -274,8 +266,6 @@ export default async function Home({
             ))}
           </div>
         </section>
-
-        {/* How it works */}
         <section
           id="how-it-works"
           className="border-y border-border/40 bg-muted/20"
@@ -305,8 +295,6 @@ export default async function Home({
             </div>
           </div>
         </section>
-
-        {/* Pricing */}
         <section id="pricing" className="mx-auto max-w-6xl px-6 py-24">
           <div className="mb-14 text-center">
             <h2 className="text-3xl font-semibold tracking-tight">
@@ -375,8 +363,6 @@ export default async function Home({
             )}
           </div>
         </section>
-
-        {/* Testimonials */}
         <section className="border-t border-border/40 bg-muted/20">
           <div className="mx-auto max-w-6xl px-6 py-24">
             <div className="mb-14 text-center">
@@ -410,8 +396,6 @@ export default async function Home({
             </div>
           </div>
         </section>
-
-        {/* CTA Banner */}
         <section className="mx-auto max-w-6xl px-6 py-24">
           <div className="rounded-2xl bg-primary/5 border border-primary/20 px-8 py-14 text-center">
             <Globe className="mx-auto mb-4 size-8 text-primary/60" />
@@ -438,8 +422,6 @@ export default async function Home({
           </div>
         </section>
       </main>
-
-      {/* Footer */}
       <footer className="border-t border-border/40">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-8 text-sm text-muted-foreground sm:flex-row">
           <div className="flex items-center gap-2">

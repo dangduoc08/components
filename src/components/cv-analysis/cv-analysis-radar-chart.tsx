@@ -68,7 +68,6 @@ export function CvAnalysisRadarChart({
         viewBox={`0 0 ${CHART_SIZE} ${CHART_SIZE}`}
         className="overflow-visible"
       >
-        {/* Grid levels */}
         {GRID_LEVEL_KEYS.map((level) => {
           const r = ((level + 1) / LEVELS) * RADIUS;
           const points = skillScores
@@ -88,8 +87,6 @@ export function CvAnalysisRadarChart({
             />
           );
         })}
-
-        {/* Axis lines */}
         {skillScores.map((s) => {
           const idx = skillScores.indexOf(s);
           const point = polarToCartesian(idx * angleStep, RADIUS);
@@ -106,8 +103,6 @@ export function CvAnalysisRadarChart({
             />
           );
         })}
-
-        {/* Job average polygon */}
         <polygon
           points={jobAvgPoints}
           fill="currentColor"
@@ -116,8 +111,6 @@ export function CvAnalysisRadarChart({
           strokeWidth="1"
           className="text-muted-foreground"
         />
-
-        {/* Candidate polygon */}
         <polygon
           points={candidatePoints}
           fill="hsl(217, 91%, 60%)"
@@ -125,8 +118,6 @@ export function CvAnalysisRadarChart({
           stroke="hsl(217, 91%, 60%)"
           strokeWidth="2"
         />
-
-        {/* Candidate dots */}
         {skillScores.map((s) => {
           const idx = skillScores.indexOf(s);
           const point = polarToCartesian(
@@ -143,8 +134,6 @@ export function CvAnalysisRadarChart({
             />
           );
         })}
-
-        {/* Labels */}
         {skillScores.map((s) => {
           const idx = skillScores.indexOf(s);
           const labelRadius = RADIUS + 20;

@@ -53,8 +53,6 @@ export function AppHeader() {
     >
       <div className="flex items-center gap-2">
         <SidebarTrigger className="-ml-1 text-muted-foreground hover:text-foreground" />
-
-        {/* Command palette trigger */}
         <button
           type="button"
           className="flex h-8 items-center gap-2 rounded-full border border-border/60 bg-muted/40 px-3 text-sm text-muted-foreground transition-colors hover:bg-muted/70 hover:text-foreground"
@@ -67,7 +65,6 @@ export function AppHeader() {
       </div>
 
       <div className="flex items-center gap-0.5">
-        {/* Starred */}
         <Button
           variant="ghost"
           size="icon"
@@ -76,8 +73,6 @@ export function AppHeader() {
           <Star className="size-4 fill-amber-400 text-amber-400" />
           <span className="sr-only">{t("starred")}</span>
         </Button>
-
-        {/* Notifications */}
         <div className="relative">
           <Button
             variant="ghost"
@@ -91,8 +86,6 @@ export function AppHeader() {
             4
           </span>
         </div>
-
-        {/* Team */}
         <Button
           variant="ghost"
           size="icon"
@@ -103,8 +96,6 @@ export function AppHeader() {
         </Button>
 
         <AppearanceSwitcher />
-
-        {/* Settings */}
         <div className="relative">
           <Button
             variant="ghost"
@@ -116,8 +107,6 @@ export function AppHeader() {
           </Button>
           <span className="absolute right-1.5 top-1.5 size-1.5 rounded-full bg-red-500" />
         </div>
-
-        {/* User avatar */}
         <Avatar className="ml-1 size-7 cursor-pointer rounded-full">
           <AvatarImage src="/avatars/shadcn.jpg" alt="User" />
           <AvatarFallback className="rounded-full text-xs">CN</AvatarFallback>

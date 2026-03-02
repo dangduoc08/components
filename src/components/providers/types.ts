@@ -1,8 +1,4 @@
-type TTheme = {
-  value: string;
-  label: string;
-  color: string;
-};
+import type { TTheme } from "@/lib/types";
 
 type TAppearance = "light" | "dark" | "system";
 

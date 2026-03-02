@@ -14,16 +14,12 @@ export function JobDetailContent({ job }: IJobDetailContentProps) {
   return (
     <div className="flex flex-col gap-6">
       <h1 className="text-2xl font-bold tracking-tight">{job.title}</h1>
-
-      {/* Job Description */}
       <div className="flex flex-col gap-2">
         <h2 className="text-sm font-semibold">{t("jobDescription")}</h2>
         <p className="text-sm leading-relaxed text-muted-foreground">
           {job.description}
         </p>
       </div>
-
-      {/* Key Responsibilities */}
       <div className="flex flex-col gap-2">
         <h2 className="text-sm font-semibold">{t("keyResponsibilities")}</h2>
         <ul className="flex flex-col gap-1.5 pl-5">
@@ -37,8 +33,6 @@ export function JobDetailContent({ job }: IJobDetailContentProps) {
           ))}
         </ul>
       </div>
-
-      {/* Why You'll Love Working Here */}
       <div className="flex flex-col gap-2">
         <h2 className="text-sm font-semibold">{t("whyYouLove")}</h2>
         <ul className="flex flex-col gap-1.5 pl-5">
@@ -52,8 +46,6 @@ export function JobDetailContent({ job }: IJobDetailContentProps) {
           ))}
         </ul>
       </div>
-
-      {/* Skills */}
       <div className="flex flex-col gap-2">
         <h2 className="text-sm font-semibold">{t("skills")}</h2>
         <div className="flex flex-wrap gap-2">
@@ -64,8 +56,6 @@ export function JobDetailContent({ job }: IJobDetailContentProps) {
           ))}
         </div>
       </div>
-
-      {/* Benefits */}
       <div className="flex flex-col gap-2">
         <h2 className="text-sm font-semibold">{t("benefits")}</h2>
         <div className="flex flex-wrap gap-2">

@@ -59,7 +59,6 @@ export function JobDetailSidebar({ job }: IJobDetailSidebarProps) {
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Job Metadata */}
       <div className="rounded-xl border border-border/50 bg-card p-5">
         <div className="flex flex-col gap-4">
           {metadataItems.map((item) => (
@@ -75,8 +74,6 @@ export function JobDetailSidebar({ job }: IJobDetailSidebarProps) {
           ))}
         </div>
       </div>
-
-      {/* Company Info */}
       <div className="rounded-xl border border-border/50 bg-card p-5">
         <div className="flex flex-col items-center gap-3 text-center">
           <Avatar className="size-14 rounded-lg">

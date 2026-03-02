@@ -31,7 +31,9 @@ function ThemeProvider({ children, themes }: IThemeProviderProps) {
   }, []);
 
   useEffect(() => {
-    applyThemeStylesheet(`/themes/${theme}.css`);
+    if (theme) {
+      applyThemeStylesheet(`/themes/${theme}.css`);
+    }
 
     if (!isInitialized.current) return;
 

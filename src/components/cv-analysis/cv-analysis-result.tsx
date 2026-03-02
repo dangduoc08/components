@@ -18,7 +18,6 @@ export function CvAnalysisResult() {
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Header */}
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold tracking-tight">
           {t("analysisResult")}
@@ -34,12 +33,8 @@ export function CvAnalysisResult() {
           </Button>
         </div>
       </div>
-
-      {/* Match Score + Strong Fit */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        {/* Match Score */}
         <div className="flex items-center gap-5 rounded-xl border border-border/50 bg-card p-5">
-          {/* Circular Progress */}
           <div className="relative shrink-0">
             <svg
               role="img"
@@ -80,8 +75,6 @@ export function CvAnalysisResult() {
             </p>
           </div>
         </div>
-
-        {/* Strong Fit */}
         <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-5 dark:border-emerald-800 dark:bg-emerald-950/50">
           <div className="flex items-center gap-2">
             <ShieldCheck className="size-5 text-emerald-600 dark:text-emerald-400" />
@@ -97,10 +90,7 @@ export function CvAnalysisResult() {
           </p>
         </div>
       </div>
-
-      {/* Skill Compatibility + Key Strengths + Potential Gaps */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        {/* Skill Compatibility */}
         <div className="rounded-xl border border-border/50 bg-card p-5">
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-sm font-semibold">{t("skillCompatibility")}</h3>
@@ -117,10 +107,7 @@ export function CvAnalysisResult() {
           </div>
           <CvAnalysisRadarChart skillScores={result.skillScores} />
         </div>
-
-        {/* Right column: Strengths + Gaps */}
         <div className="flex flex-col gap-4">
-          {/* Key Strengths */}
           <div className="rounded-xl border border-border/50 bg-card p-5">
             <div className="mb-3 flex items-center gap-2">
               <ThumbsUp className="size-4 text-blue-500" />
@@ -144,8 +131,6 @@ export function CvAnalysisResult() {
               ))}
             </ul>
           </div>
-
-          {/* Potential Gaps */}
           <div className="rounded-xl border border-border/50 bg-card p-5">
             <div className="mb-3 flex items-center gap-2">
               <AlertTriangle className="size-4 text-amber-500" />
@@ -165,8 +150,6 @@ export function CvAnalysisResult() {
           </div>
         </div>
       </div>
-
-      {/* Disclaimer */}
       <p className="text-center text-xs text-muted-foreground">
         {t("disclaimer")}
       </p>

@@ -1,5 +1,5 @@
-import { AppHeader } from "@/components/app-header";
-import { AppSidebar } from "@/components/app-sidebar";
+import { AppSidebar } from "@/components/blocks/sidebar/app-sidebar";
+import { SiteHeader } from "@/components/blocks/sidebar/site-header";
 import { MOCK_JOBS } from "@/components/job/constants";
 import { JobCard } from "@/components/job/job-card";
 import { JobListHeader } from "@/components/job/job-list-header";
@@ -11,7 +11,7 @@ export default function JobListPage() {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <AppHeader />
+        <SiteHeader />
         <div className="flex flex-1 flex-col gap-6 p-6">
           <JobListHeader />
           <JobListToolbar />

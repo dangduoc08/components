@@ -1,3 +1,5 @@
+export type { ISidebarProps } from "./sidebar";
+export { Sidebar } from "./sidebar";
 export type { ISidebarContentProps } from "./sidebar-content";
 export { SidebarContent } from "./sidebar-content";
 export type { ISidebarProviderProps } from "./sidebar-context";
@@ -22,8 +24,6 @@ export type { ISidebarInputProps } from "./sidebar-input";
 export { SidebarInput } from "./sidebar-input";
 export type { ISidebarInsetProps } from "./sidebar-inset";
 export { SidebarInset } from "./sidebar-inset";
-export type { ISidebarProps } from "./sidebar-main";
-export { Sidebar } from "./sidebar-main";
 export type {
   ISidebarMenuActionProps,
   ISidebarMenuBadgeProps,

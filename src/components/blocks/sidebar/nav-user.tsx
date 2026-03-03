@@ -8,7 +8,6 @@ import {
   LogOut,
   Sparkles,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -27,19 +26,16 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-interface IUser {
-  name: string;
-  email: string;
-  avatar: string;
-}
-
-interface INavUserProps {
-  user: IUser;
-}
-
-export function NavUser({ user }: INavUserProps) {
+export function NavUser({
+  user,
+}: {
+  user: {
+    name: string;
+    email: string;
+    avatar: string;
+  };
+}) {
   const { isMobile } = useSidebar();
-  const t = useTranslations("nav");
 
   return (
     <SidebarMenu>
@@ -83,28 +79,28 @@ export function NavUser({ user }: INavUserProps) {
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <Sparkles />
-                {t("upgradeToPro")}
+                Upgrade to Pro
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <BadgeCheck />
-                {t("account")}
+                Account
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <CreditCard />
-                {t("billing")}
+                Billing
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Bell />
-                {t("notifications")}
+                Notifications
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <LogOut />
-              {t("logOut")}
+              Log out
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

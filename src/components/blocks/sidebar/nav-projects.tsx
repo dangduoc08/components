@@ -2,12 +2,11 @@
 
 import {
   Folder,
-  Forward,
   type LucideIcon,
   MoreHorizontal,
+  Share,
   Trash2,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
 
 import {
   DropdownMenu,
@@ -26,23 +25,20 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-interface IProject {
-  name: string;
-  url: string;
-  icon: LucideIcon;
-}
-
-interface INavProjectsProps {
-  projects: IProject[];
-}
-
-export function NavProjects({ projects }: INavProjectsProps) {
+export function NavProjects({
+  projects,
+}: {
+  projects: {
+    name: string;
+    url: string;
+    icon: LucideIcon;
+  }[];
+}) {
   const { isMobile } = useSidebar();
-  const t = useTranslations("nav");
 
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>{t("projects")}</SidebarGroupLabel>
+      <SidebarGroupLabel>Projects</SidebarGroupLabel>
       <SidebarMenu>
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
@@ -56,35 +52,35 @@ export function NavProjects({ projects }: INavProjectsProps) {
               <DropdownMenuTrigger asChild>
                 <SidebarMenuAction showOnHover>
                   <MoreHorizontal />
-                  <span className="sr-only">{t("more")}</span>
+                  <span className="sr-only">More</span>
                 </SidebarMenuAction>
               </DropdownMenuTrigger>
               <DropdownMenuContent
-                className="w-48 rounded-lg"
+                className="w-48"
                 side={isMobile ? "bottom" : "right"}
                 align={isMobile ? "end" : "start"}
               >
                 <DropdownMenuItem>
                   <Folder className="text-muted-foreground" />
-                  <span>{t("viewProject")}</span>
+                  <span>View Project</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Forward className="text-muted-foreground" />
-                  <span>{t("shareProject")}</span>
+                  <Share className="text-muted-foreground" />
+                  <span>Share Project</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                   <Trash2 className="text-muted-foreground" />
-                  <span>{t("deleteProject")}</span>
+                  <span>Delete Project</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </SidebarMenuItem>
         ))}
         <SidebarMenuItem>
-          <SidebarMenuButton className="text-sidebar-foreground/70">
-            <MoreHorizontal className="text-sidebar-foreground/70" />
-            <span>{t("more")}</span>
+          <SidebarMenuButton>
+            <MoreHorizontal />
+            <span>More</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>

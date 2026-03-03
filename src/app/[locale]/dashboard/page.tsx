@@ -1,5 +1,6 @@
-import { AppSidebar } from "@/components/app-sidebar";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/blocks/sidebar/app-sidebar";
+import { SiteHeader } from "@/components/blocks/sidebar/site-header";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 const _COLORS = [
   "bg-red-200 dark:bg-red-900/40",
@@ -33,29 +34,25 @@ const _ROWS = [
 
 export default function Page() {
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      {/* <SidebarInset>
-        <AppHeader />
-        <div className="flex flex-1 flex-col gap-6 p-4">
-          <div className="grid gap-4 md:grid-cols-3">
-            <div className="bg-red-200 dark:bg-red-900/40 aspect-video rounded-xl" />
-            <div className="bg-blue-200 dark:bg-blue-900/40 aspect-video rounded-xl" />
-            <div className="bg-green-200 dark:bg-green-900/40 aspect-video rounded-xl" />
-          </div>
-
-          {ROWS.map((rowId, index) => (
-            <div key={rowId} className="grid gap-4 md:grid-cols-2">
-              <div
-                className={`${COLORS[index % COLORS.length]} h-32 rounded-xl`}
-              />
-              <div
-                className={`${COLORS[(index + 6) % COLORS.length]} h-32 rounded-xl`}
-              />
-            </div>
-          ))}
+    <div className="[--header-height:calc(--spacing(14))]">
+      <SidebarProvider className="flex flex-col">
+        <SiteHeader />
+        <div className="flex flex-1">
+          <AppSidebar />
+          <SidebarInset>
+            {_ROWS.map((rowId, index) => (
+              <div key={rowId} className="grid gap-4 md:grid-cols-2">
+                <div
+                  className={`${_COLORS[index % _COLORS.length]} h-32 rounded-xl`}
+                />
+                <div
+                  className={`${_COLORS[(index + 6) % _COLORS.length]} h-32 rounded-xl`}
+                />
+              </div>
+            ))}
+          </SidebarInset>
         </div>
-      </SidebarInset> */}
-    </SidebarProvider>
+      </SidebarProvider>
+    </div>
   );
 }

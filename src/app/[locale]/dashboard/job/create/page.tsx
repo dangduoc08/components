@@ -1,8 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { AppHeader } from "@/components/app-header";
-import { AppSidebar } from "@/components/app-sidebar";
+import { AppSidebar } from "@/components/blocks/sidebar/app-sidebar";
+import { SiteHeader } from "@/components/blocks/sidebar/site-header";
 import { JobCreateDetails } from "@/components/job/job-create-details";
 import { JobCreateProperties } from "@/components/job/job-create-properties";
 import {
@@ -25,7 +25,7 @@ export default function JobCreatePage() {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <AppHeader />
+        <SiteHeader />
         <div className="flex flex-1 flex-col gap-6 p-6">
           {/* Header */}
           <div className="flex flex-col gap-2">

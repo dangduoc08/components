@@ -1,8 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { AppHeader } from "@/components/app-header";
-import { AppSidebar } from "@/components/app-sidebar";
+import { AppSidebar } from "@/components/blocks/sidebar/app-sidebar";
+import { SiteHeader } from "@/components/blocks/sidebar/site-header";
 import { MOCK_JOB_DETAIL } from "@/components/job/constants";
 import { JobDetailContent } from "@/components/job/job-detail-content";
 import { JobDetailHeader } from "@/components/job/job-detail-header";
@@ -19,7 +19,7 @@ export default function JobDetailPage() {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <AppHeader />
+        <SiteHeader />
         <div className="flex flex-1 flex-col gap-6 p-6">
           <JobDetailHeader isPublished={job.isPublished} />
 

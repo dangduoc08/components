@@ -10,7 +10,6 @@ import {
   Zap,
 } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { LanguageSwitcher } from "@/components/language-switcher";
 import { Link } from "@/i18n/navigation";
 
 const FEATURE_ICONS = [
@@ -149,22 +148,6 @@ export default async function Home({
               </a>
             ))}
           </nav>
-
-          <div className="flex items-center gap-3">
-            <LanguageSwitcher />
-            <Link
-              href="/dashboard"
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {t("signIn")}
-            </Link>
-            <Link
-              href="/dashboard"
-              className="rounded-full bg-primary px-4 py-1.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
-            >
-              {t("getStarted")}
-            </Link>
-          </div>
         </div>
       </header>
 

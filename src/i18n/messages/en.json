@@ -6,7 +6,9 @@
     "job": "Job",
     "resume": "Resume",
     "list": "List",
-    "analyzeCV": "Analyze CV"
+    "analyzeCV": "Analyze CV",
+    "support": "Support",
+    "feedback": "Feedback"
   },
   "breadcrumb": {
     "dashboard": "Dashboard"

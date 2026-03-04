@@ -1,76 +1,81 @@
 "use client";
 
-import { Command, SquareTerminal } from "lucide-react";
+import {
+  Briefcase,
+  Command,
+  FileText,
+  LayoutDashboard,
+  LifeBuoy,
+  MessageSquare,
+} from "lucide-react";
+import { useTranslations } from "next-intl";
 import type * as React from "react";
 
 import { Sidebar } from "@/components/ui/sidebar";
 
 import { NavContent } from "./nav-content";
+import { NavFooter } from "./nav-footer";
 import { NavHeader } from "./nav-header";
-import type { TNavGroup } from "./types";
+import type { TNavGroup, TNavItem } from "./types";
 
-const data = {
-  header: {
-    logo: <Command className="size-4" />,
-    name: "Owlky",
-  },
+export function Nav({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const t = useTranslations("nav");
 
-  content: [
+  const footer: TNavItem[] = [
+    { title: t("support"), url: "#", icon: LifeBuoy },
+    { title: t("feedback"), url: "#", icon: MessageSquare },
+  ];
+
+  const content: TNavGroup[] = [
     {
       order: 0,
-      "": [
+      title: "",
+      items: [
         {
-          title: "Dashboard",
+          title: t("dashboard"),
           url: "dashboard",
-          icon: SquareTerminal,
+          icon: LayoutDashboard,
         },
       ],
     },
     {
       order: 1,
-      platform: [
+      title: t("platform"),
+      items: [
         {
-          title: "Job",
-          titleKey: "job",
-          url: "#",
-          icon: SquareTerminal,
-          isActive: true,
-          items: [{ title: "List", titleKey: "list", url: "#" }],
+          title: t("job"),
+          icon: Briefcase,
+          defaultOpen: true,
+          items: [{ title: t("list"), url: "jobs" }],
         },
         {
-          title: "Resume",
-          titleKey: "resume",
-          url: "#",
-          icon: SquareTerminal,
-          isActive: true,
-          items: [{ title: "Analyze CV", titleKey: "analyzeCV", url: "#" }],
+          title: t("resume"),
+          icon: FileText,
+          defaultOpen: true,
+          items: [{ title: t("analyzeCV"), url: "cv" }],
         },
       ],
     },
     {
       order: 2,
-      organization: [
-        {
-          title: "Samsung",
-          url: "#",
-          isActive: true,
-        },
-        {
-          title: "Facebook",
-          url: "#",
-          isActive: true,
-        },
+      title: t("organization"),
+      items: [
+        { title: "Samsung", url: "#" },
+        { title: "Facebook", url: "#" },
       ],
     },
-  ] as TNavGroup[],
-};
+  ];
 
-export function Nav({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <nav {...props}>
       <Sidebar className="top-(--header-height) h-[calc(100svh-var(--header-height))]!">
-        <NavHeader logo={data.header.logo} name={data.header.name} href="/" />
-        <NavContent content={data.content} />
+        <NavHeader
+          logo={<Command className="size-4" />}
+          name="Owlky"
+          href="/"
+        />
+        <NavContent content={content} />
+        <NavFooter items={footer} />
       </Sidebar>
     </nav>
   );

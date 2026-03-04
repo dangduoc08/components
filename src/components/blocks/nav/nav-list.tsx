@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 import type * as React from "react";
 
 import {
@@ -20,9 +20,9 @@ export interface INavListProps
 }
 
 export function NavList({ items, ...props }: INavListProps) {
-  const t = useTranslations("nav");
-  const resolveTitle = (title: string, titleKey?: string) =>
-    titleKey ? t(titleKey as never) : title;
+  const pathname = usePathname();
+  const isActive = (url?: string) =>
+    !!url && url !== "#" && pathname.endsWith(`/${url}`);
 
   return (
     <SidebarGroup {...props}>
@@ -30,10 +30,14 @@ export function NavList({ items, ...props }: INavListProps) {
         <SidebarMenu>
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton asChild size="sm">
-                <Link href={item.url}>
+              <SidebarMenuButton
+                asChild
+                size="sm"
+                isActive={isActive(item.url)}
+              >
+                <Link href={item.url ?? "#"}>
                   {item.icon && <item.icon />}
-                  <span>{resolveTitle(item.title, item.titleKey)}</span>
+                  <span>{item.title}</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>

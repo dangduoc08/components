@@ -6,7 +6,9 @@
     "job": "Việc làm",
     "resume": "Hồ sơ",
     "list": "Danh sách",
-    "analyzeCV": "Phân tích CV"
+    "analyzeCV": "Phân tích CV",
+    "support": "Hỗ trợ",
+    "feedback": "Phản hồi"
   },
   "breadcrumb": {
     "dashboard": "Bảng điều khiển"

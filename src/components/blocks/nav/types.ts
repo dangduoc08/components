@@ -2,20 +2,19 @@ import type { LucideIcon } from "lucide-react";
 
 export type TNavSubItem = {
   title: string;
-  titleKey?: string;
   url: string;
 };
 
 export type TNavItem = {
   title: string;
-  titleKey?: string;
-  url: string;
+  url?: string;
   icon?: LucideIcon;
-  isActive?: boolean;
+  defaultOpen?: boolean;
   items?: TNavSubItem[];
 };
 
 export type TNavGroup = {
   order: number;
-  [label: string]: TNavItem[] | number;
+  title: string;
+  items: TNavItem[];
 };

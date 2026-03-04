@@ -20,6 +20,8 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 
+import { Small } from "@/components/ui/typography";
+
 import type { TNavItem } from "./types";
 
 export interface INavCollapsibleProps {
@@ -53,7 +55,7 @@ export function NavCollapsible({ title, items }: INavCollapsibleProps) {
                     isActive={isActive(item.url)}
                   >
                     {item.icon && <item.icon />}
-                    <span>{item.title}</span>
+                    <Small>{item.title}</Small>
                     <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                   </SidebarMenuButton>
                 </CollapsibleTrigger>
@@ -65,7 +67,7 @@ export function NavCollapsible({ title, items }: INavCollapsibleProps) {
                 >
                   <Link href={item.url ?? "#"}>
                     {item.icon && <item.icon />}
-                    <span>{item.title}</span>
+                    <Small>{item.title}</Small>
                   </Link>
                 </SidebarMenuButton>
               )}
@@ -79,7 +81,7 @@ export function NavCollapsible({ title, items }: INavCollapsibleProps) {
                           isActive={isActive(subItem.url)}
                         >
                           <Link href={subItem.url}>
-                            <span>{subItem.title}</span>
+                            <Small>{subItem.title}</Small>
                           </Link>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>

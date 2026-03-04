@@ -12,6 +12,8 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
+import { Small } from "@/components/ui/typography";
+
 import type { TNavItem } from "./types";
 
 export interface INavListProps
@@ -37,7 +39,7 @@ export function NavList({ items, ...props }: INavListProps) {
               >
                 <Link href={item.url ?? "#"}>
                   {item.icon && <item.icon />}
-                  <span>{item.title}</span>
+                  <Small>{item.title}</Small>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>

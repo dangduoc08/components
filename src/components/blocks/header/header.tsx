@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
 import { useSidebar } from "@/components/ui/sidebar";
+import { Small } from "@/components/ui/typography";
 import { useBreadcrumbs } from "@/hooks/use-breadcrumbs";
 import { cn } from "@/lib/utils";
 import { HeaderSearch } from "./header-search";
@@ -99,7 +100,9 @@ export function Header({ avatarSrc, userName }: IHeaderProps) {
               <>
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
-                    <Link href={firstItem.href}>{firstItem.label}</Link>
+                    <Link href={firstItem.href}>
+                      <Small>{firstItem.label}</Small>
+                    </Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
@@ -111,7 +114,9 @@ export function Header({ avatarSrc, userName }: IHeaderProps) {
                     <DropdownMenuContent align="start">
                       {collapsedItems.map(({ label, href }) => (
                         <DropdownMenuItem key={href} asChild>
-                          <Link href={href}>{label}</Link>
+                          <Link href={href}>
+                            <Small>{label}</Small>
+                          </Link>
                         </DropdownMenuItem>
                       ))}
                     </DropdownMenuContent>
@@ -121,13 +126,15 @@ export function Header({ avatarSrc, userName }: IHeaderProps) {
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
                     <Link href={secondToLastItem.href}>
-                      {secondToLastItem.label}
+                      <Small>{secondToLastItem.label}</Small>
                     </Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>{lastItem.label}</BreadcrumbPage>
+                  <BreadcrumbPage>
+                    <Small>{lastItem.label}</Small>
+                  </BreadcrumbPage>
                 </BreadcrumbItem>
               </>
             ) : (
@@ -136,10 +143,14 @@ export function Header({ avatarSrc, userName }: IHeaderProps) {
                   {index > 0 && <BreadcrumbSeparator />}
                   <BreadcrumbItem>
                     {isLast ? (
-                      <BreadcrumbPage>{label}</BreadcrumbPage>
+                      <BreadcrumbPage>
+                        <Small>{label}</Small>
+                      </BreadcrumbPage>
                     ) : (
                       <BreadcrumbLink asChild>
-                        <Link href={href}>{label}</Link>
+                        <Link href={href}>
+                          <Small>{label}</Small>
+                        </Link>
                       </BreadcrumbLink>
                     )}
                   </BreadcrumbItem>

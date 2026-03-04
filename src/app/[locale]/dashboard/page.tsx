@@ -1,5 +1,5 @@
 import { Header } from "@/components/blocks/header";
-import { AppSidebar } from "@/components/blocks/sidebar/app-sidebar";
+import { Nav } from "@/components/blocks/nav";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 const _COLORS = [
@@ -38,7 +38,7 @@ export default function Page() {
       <SidebarProvider className="flex flex-col">
         <Header userName="John Doe" />
         <div className="flex flex-1">
-          <AppSidebar />
+          <Nav />
           <SidebarInset>
             {_ROWS.map((rowId, index) => (
               <div key={rowId} className="grid gap-4 md:grid-cols-2">

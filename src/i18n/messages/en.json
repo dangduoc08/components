@@ -1,4 +1,13 @@
 {
+  "nav": {
+    "platform": "Platform",
+    "organization": "Organization",
+    "dashboard": "Dashboard",
+    "job": "Job",
+    "resume": "Resume",
+    "list": "List",
+    "analyzeCV": "Analyze CV"
+  },
   "breadcrumb": {
     "dashboard": "Dashboard"
   },

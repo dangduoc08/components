@@ -155,7 +155,7 @@ export function Header({ avatarSrc, userName }: IHeaderProps) {
               <Settings className="size-4" />
             </Link>
           </Button>
-          <Avatar size="sm">
+          <Avatar size="default">
             <AvatarImage src={avatarSrc} alt={userName} />
             <AvatarFallback name={userName} />
           </Avatar>

@@ -1,4 +1,13 @@
 {
+  "nav": {
+    "platform": "Nền tảng",
+    "organization": "Tổ chức",
+    "dashboard": "Bảng điều khiển",
+    "job": "Việc làm",
+    "resume": "Hồ sơ",
+    "list": "Danh sách",
+    "analyzeCV": "Phân tích CV"
+  },
   "breadcrumb": {
     "dashboard": "Bảng điều khiển"
   },

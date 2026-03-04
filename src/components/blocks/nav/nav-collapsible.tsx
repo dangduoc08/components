@@ -1,6 +1,8 @@
 "use client";
 
-import { ChevronRight, type LucideIcon } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import {
   Collapsible,
@@ -19,32 +21,33 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 
-export function NavMain({
-  items,
-}: {
-  items: {
-    title: string;
-    url: string;
-    icon: LucideIcon;
-    isActive?: boolean;
-    items?: {
-      title: string;
-      url: string;
-    }[];
-  }[];
-}) {
+import type { TNavItem } from "./types";
+
+export interface INavCollapsibleProps {
+  label: string;
+  items: TNavItem[];
+}
+
+export function NavCollapsible({ label, items }: INavCollapsibleProps) {
+  const t = useTranslations("nav");
+  const resolveTitle = (title: string, titleKey?: string) =>
+    titleKey ? t(titleKey as never) : title;
+
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarGroupLabel>{resolveTitle(label, label)}</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip={item.title}>
-                <a href={item.url}>
-                  <item.icon />
-                  <span>{item.title}</span>
-                </a>
+              <SidebarMenuButton
+                asChild
+                tooltip={resolveTitle(item.title, item.titleKey)}
+              >
+                <Link href={item.url}>
+                  {item.icon && <item.icon />}
+                  <span>{resolveTitle(item.title, item.titleKey)}</span>
+                </Link>
               </SidebarMenuButton>
               {item.items?.length ? (
                 <>
@@ -59,9 +62,11 @@ export function NavMain({
                       {item.items?.map((subItem) => (
                         <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton asChild>
-                            <a href={subItem.url}>
-                              <span>{subItem.title}</span>
-                            </a>
+                            <Link href={subItem.url}>
+                              <span>
+                                {resolveTitle(subItem.title, subItem.titleKey)}
+                              </span>
+                            </Link>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
                       ))}

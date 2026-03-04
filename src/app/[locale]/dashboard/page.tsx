@@ -1,5 +1,5 @@
+import { Header } from "@/components/blocks/header";
 import { AppSidebar } from "@/components/blocks/sidebar/app-sidebar";
-import { SiteHeader } from "@/components/blocks/sidebar/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 const _COLORS = [
@@ -36,7 +36,7 @@ export default function Page() {
   return (
     <div className="[--header-height:calc(--spacing(14))]">
       <SidebarProvider className="flex flex-col">
-        <SiteHeader />
+        <Header />
         <div className="flex flex-1">
           <AppSidebar />
           <SidebarInset>

@@ -1,8 +1,9 @@
 "use client";
 
-import { SidebarIcon } from "lucide-react";
+import { Settings, SidebarIcon } from "lucide-react";
 import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -27,7 +28,12 @@ import { HeaderSearch } from "./header-search";
 
 const BREADCRUMB_COLLAPSE_THRESHOLD = 3;
 
-export function Header() {
+interface IHeaderProps {
+  avatarSrc?: string;
+  userName: string;
+}
+
+export function Header({ avatarSrc, userName }: IHeaderProps) {
   const { toggleSidebar } = useSidebar();
   const [isScrolled, setIsScrolled] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
@@ -142,7 +148,18 @@ export function Header() {
             )}
           </BreadcrumbList>
         </Breadcrumb>
-        <HeaderSearch />
+        <div className="ml-auto flex items-center gap-2">
+          <HeaderSearch />
+          <Button variant="ghost" size="icon" className="h-8 w-8" asChild>
+            <Link href="/settings">
+              <Settings className="size-4" />
+            </Link>
+          </Button>
+          <Avatar size="sm">
+            <AvatarImage src={avatarSrc} alt={userName} />
+            <AvatarFallback name={userName} />
+          </Avatar>
+        </div>
       </div>
     </header>
   );

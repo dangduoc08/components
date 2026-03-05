@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Roboto, Roboto_Mono, Roboto_Serif } from "next/font/google";
+import { Inter, Roboto_Mono, Roboto_Serif } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
@@ -9,7 +9,7 @@ import { routing } from "@/i18n/routing";
 import { getThemes } from "@/lib/themes";
 import "../globals.css";
 
-const fontSans = Roboto({
+const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });

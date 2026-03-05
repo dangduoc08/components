@@ -21,7 +21,7 @@ export function NavHeader({ logo, name, href }: INavHeaderProps) {
         <SidebarMenuItem>
           <SidebarMenuButton size="lg" asChild>
             <Link href={href}>
-              <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+              <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-auto size-13 items-center justify-center rounded-lg">
                 {logo}
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">

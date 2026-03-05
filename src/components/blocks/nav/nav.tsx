@@ -1,13 +1,13 @@
 "use client";
 
 import {
-  Briefcase,
-  Command,
+  BriefcaseBusiness,
   FileText,
   LayoutDashboard,
   LifeBuoy,
   MessageSquare,
 } from "lucide-react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import type * as React from "react";
 
@@ -44,7 +44,7 @@ export function Nav({ ...props }: React.ComponentProps<typeof Sidebar>) {
       items: [
         {
           title: t("job"),
-          icon: Briefcase,
+          icon: BriefcaseBusiness,
           defaultOpen: true,
           items: [{ title: t("list"), url: "jobs" }],
         },
@@ -70,7 +70,7 @@ export function Nav({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <nav {...props}>
       <Sidebar className="top-(--header-height) h-[calc(100svh-var(--header-height))]!">
         <NavHeader
-          logo={<Command className="size-4" />}
+          logo={<Image src="/owlky.png" alt="logo" height={40} width={40} />}
           name="Owlky"
           href="/"
         />

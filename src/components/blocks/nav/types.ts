@@ -5,13 +5,24 @@ export type TNavSubItem = {
   url: string;
 };
 
-export type TNavItem = {
+export type TNavLinkItem = {
+  type?: "link";
   title: string;
   url?: string;
   icon?: LucideIcon;
-  defaultOpen?: boolean;
+  isDefaultOpen?: boolean;
   items?: TNavSubItem[];
 };
+
+export type TNavCheckboxItem = {
+  type: "checkbox";
+  title: string;
+  icon?: LucideIcon;
+  isChecked?: boolean;
+  onCheckedChange?: (isChecked: boolean) => void;
+};
+
+export type TNavItem = TNavLinkItem | TNavCheckboxItem;
 
 export type TNavGroup = {
   order: number;

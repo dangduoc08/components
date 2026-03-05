@@ -45,13 +45,13 @@ export function Nav({ ...props }: React.ComponentProps<typeof Sidebar>) {
         {
           title: t("job"),
           icon: BriefcaseBusiness,
-          defaultOpen: true,
+          isDefaultOpen: true,
           items: [{ title: t("list"), url: "jobs" }],
         },
         {
           title: t("resume"),
           icon: FileText,
-          defaultOpen: true,
+          isDefaultOpen: true,
           items: [{ title: t("analyzeCV"), url: "cv" }],
         },
       ],
@@ -60,8 +60,8 @@ export function Nav({ ...props }: React.ComponentProps<typeof Sidebar>) {
       order: 2,
       title: t("organization"),
       items: [
-        { title: "Samsung", url: "#" },
-        { title: "Facebook", url: "#" },
+        { title: "Samsung", type: "checkbox" },
+        { title: "Facebook", type: "checkbox" },
       ],
     },
   ];

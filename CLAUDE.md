@@ -24,6 +24,20 @@
 
 These rules are mandatory and must always be followed when generating or refactoring code.
 
+## Typography Rules
+- Always prefer typography components from `@/components/ui/typography` over raw HTML elements or plain `<span>` for rendering text.
+- Use the appropriate component for the semantic role:
+  - `H1`–`H4` for headings
+  - `P` for body paragraphs
+  - `Lead` for introductory/hero text
+  - `Large` for emphasized non-heading text
+  - `Small` for labels, captions, nav items, and UI text
+  - `Muted` for secondary/supporting text
+  - `Blockquote` for quotes
+  - `Code` for inline code
+  - `List` for unordered lists
+- When creating any component that renders visible text, evaluate whether a typography component fits before falling back to raw elements.
+
 ## Code Style Rules
 - Do NOT add comments to generated code unless the logic is genuinely non-obvious and cannot be made clear through naming alone.
 - Never add comments that describe what the code does — the code itself should be self-explanatory.

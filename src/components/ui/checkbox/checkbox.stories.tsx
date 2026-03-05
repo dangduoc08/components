@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { Muted, Small } from "@/components/ui/typography";
 
 const meta = {
   title: "UI/Checkbox",
@@ -38,10 +40,8 @@ export const WithDescription: Story = {
     <div className="flex items-start gap-2">
       <Checkbox id="notifications" className="mt-0.5" />
       <div className="flex flex-col gap-1">
-        <Label htmlFor="notifications">Email notifications</Label>
-        <p className="text-muted-foreground text-sm">
-          Receive emails about your account activity.
-        </p>
+        <Label htmlFor="notifications">Enable notifications</Label>
+        <Muted>You can enable or disable notifications at any time.</Muted>
       </div>
     </div>
   ),
@@ -51,7 +51,7 @@ export const Checked: Story = {
   render: () => (
     <div className="flex items-center gap-2">
       <Checkbox id="checked" defaultChecked />
-      <Label htmlFor="checked">Checked by default</Label>
+      <Label htmlFor="checked">Accept terms and conditions</Label>
     </div>
   ),
 };
@@ -61,6 +61,18 @@ export const Indeterminate: Story = {
     <div className="flex items-center gap-2">
       <Checkbox id="indeterminate" checked="indeterminate" />
       <Label htmlFor="indeterminate">Indeterminate</Label>
+    </div>
+  ),
+};
+
+export const Invalid: Story = {
+  render: () => (
+    <div className="flex items-start gap-2" data-invalid>
+      <Checkbox id="invalid" aria-invalid className="mt-0.5" />
+      <div className="flex flex-col gap-1">
+        <Label htmlFor="invalid">Accept terms and conditions</Label>
+        <Muted>By clicking this checkbox, you agree to the terms.</Muted>
+      </div>
     </div>
   ),
 };
@@ -91,12 +103,12 @@ export const Disabled: Story = {
 export const Group: Story = {
   render: () => (
     <div className="flex flex-col gap-3">
-      <p className="text-sm font-medium">Select your interests</p>
+      <Small>Show these items on the desktop</Small>
       {[
-        { id: "design", label: "Design" },
-        { id: "engineering", label: "Engineering" },
-        { id: "product", label: "Product" },
-        { id: "marketing", label: "Marketing" },
+        { id: "hard-disks", label: "Hard Disks" },
+        { id: "external-disks", label: "External Disks" },
+        { id: "cds-dvds", label: "CDs, DVDs, and iPods" },
+        { id: "connected-servers", label: "Connected servers" },
       ].map(({ id, label }) => (
         <div key={id} className="flex items-center gap-2">
           <Checkbox id={id} />

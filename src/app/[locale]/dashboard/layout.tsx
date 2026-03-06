@@ -32,7 +32,7 @@ export default function DashboardLayout({
       order: 0,
       title: "",
       items: [
-        { title: t("dashboard"), url: "dashboard", icon: LayoutDashboard },
+        { title: t("dashboard"), url: "/dashboard", icon: LayoutDashboard },
       ],
     },
     {
@@ -43,13 +43,13 @@ export default function DashboardLayout({
           title: t("job"),
           icon: BriefcaseBusiness,
           isDefaultOpen: true,
-          items: [{ title: t("list"), url: "jobs" }],
+          items: [{ title: t("list"), url: "/dashboard/jobs" }],
         },
         {
           title: t("resume"),
           icon: FileText,
           isDefaultOpen: true,
-          items: [{ title: t("analyzeCV"), url: "cv" }],
+          items: [{ title: t("analyzeCV"), url: "/cv" }],
         },
       ],
     },

@@ -78,7 +78,7 @@ export function Header({ avatarSrc, userName }: IHeaderProps) {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 flex w-full items-center border-b bg-background transition-all duration-300 ease-in-out",
+        "sticky top-0 z-50 flex flex-col w-full border-b bg-background transition-all duration-300 ease-in-out",
         isScrolled
           ? "border-border/40 bg-background/70 shadow-md backdrop-blur-xl saturate-150"
           : "border-transparent shadow-none backdrop-blur-none",
@@ -172,6 +172,12 @@ export function Header({ avatarSrc, userName }: IHeaderProps) {
           </Avatar>
         </div>
       </div>
+      <Separator
+        className={cn(
+          "transition-opacity duration-300",
+          isScrolled ? "opacity-0" : "opacity-100",
+        )}
+      />
     </header>
   );
 }

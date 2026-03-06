@@ -1,10 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-
 import { SidebarMenuButton } from "@/components/ui/sidebar";
 import { Small } from "@/components/ui/typography";
+import { Link } from "@/i18n/navigation";
 
 import type { TNavLinkItem } from "./types";
 
@@ -16,7 +15,7 @@ export interface INavLinkItemProps {
 export function NavLinkItem({ item, withTooltip }: INavLinkItemProps) {
   const pathname = usePathname();
   const isActive =
-    !!item.url && item.url !== "#" && pathname.endsWith(`/${item.url}`);
+    !!item.url && item.url !== "#" && pathname.endsWith(item.url);
 
   return (
     <SidebarMenuButton

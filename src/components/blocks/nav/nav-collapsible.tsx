@@ -1,9 +1,7 @@
 "use client";
 
 import { ChevronRight } from "lucide-react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-
 import {
   Collapsible,
   CollapsibleContent,
@@ -19,8 +17,8 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
-
 import { Small } from "@/components/ui/typography";
+import { Link } from "@/i18n/navigation";
 
 import { NavCheckboxItem } from "./nav-checkbox-item";
 import { NavLinkItem } from "./nav-link-item";
@@ -34,7 +32,7 @@ export interface INavCollapsibleProps {
 export function NavCollapsible({ title, items }: INavCollapsibleProps) {
   const pathname = usePathname();
   const isActive = (url?: string) =>
-    !!url && url !== "#" && (pathname?.endsWith(`/${url}`) ?? false);
+    !!url && url !== "#" && (pathname?.endsWith(url) ?? false);
 
   return (
     <SidebarGroup>

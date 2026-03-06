@@ -1,7 +1,3 @@
-import { Header } from "@/components/blocks/header";
-import { Nav } from "@/components/blocks/nav";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-
 const _COLORS = [
   "bg-red-200 dark:bg-red-900/40",
   "bg-blue-200 dark:bg-blue-900/40",
@@ -34,25 +30,17 @@ const _ROWS = [
 
 export default function Page() {
   return (
-    <div className="[--header-height:calc(--spacing(14))]">
-      <SidebarProvider className="flex flex-col">
-        <Header userName="John Doe" />
-        <div className="flex flex-1">
-          <Nav />
-          <SidebarInset>
-            {_ROWS.map((rowId, index) => (
-              <div key={rowId} className="grid gap-4 md:grid-cols-2">
-                <div
-                  className={`${_COLORS[index % _COLORS.length]} h-32 rounded-xl`}
-                />
-                <div
-                  className={`${_COLORS[(index + 6) % _COLORS.length]} h-32 rounded-xl`}
-                />
-              </div>
-            ))}
-          </SidebarInset>
+    <>
+      {_ROWS.map((rowId, index) => (
+        <div key={rowId} className="grid gap-4 md:grid-cols-2">
+          <div
+            className={`${_COLORS[index % _COLORS.length]} h-32 rounded-xl`}
+          />
+          <div
+            className={`${_COLORS[(index + 6) % _COLORS.length]} h-32 rounded-xl`}
+          />
         </div>
-      </SidebarProvider>
-    </div>
+      ))}
+    </>
   );
 }

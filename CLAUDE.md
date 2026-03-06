@@ -18,7 +18,8 @@
 - Component Props and State interfaces are allowed inside the component file.
 - Never mix constants, types, and interfaces in the same file.
 - Never define shared types, interfaces, or constants inside component files.
-
+- Each React component must live in its own file — never define multiple components in a single file.
+- Every component folder must have an `index.ts` file that re-exports all public components and types from that folder. External code must import from the folder index, not directly from internal files.
 - Provider files must be independent — each provider lives in its own file and must not import other providers.
 - The component that composes providers lives in `index.tsx` of the same folder.
 

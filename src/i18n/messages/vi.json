@@ -10,8 +10,19 @@
     "support": "Hỗ trợ",
     "feedback": "Phản hồi"
   },
+  "jobs": {
+    "title": "Danh sách việc làm",
+    "postNewJob": "Đăng tin mới",
+    "open": "Đang tuyển",
+    "closed": "Đã đóng",
+    "fullTime": "Toàn thời gian",
+    "partTime": "Bán thời gian",
+    "postedAt": "Ngày đăng",
+    "candidates": "ứng viên"
+  },
   "breadcrumb": {
-    "dashboard": "Bảng điều khiển"
+    "dashboard": "Bảng điều khiển",
+    "jobs": "Việc làm"
   },
   "header": {
     "search": "Tìm kiếm",

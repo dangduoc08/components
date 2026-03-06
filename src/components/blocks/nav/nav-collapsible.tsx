@@ -34,7 +34,7 @@ export interface INavCollapsibleProps {
 export function NavCollapsible({ title, items }: INavCollapsibleProps) {
   const pathname = usePathname();
   const isActive = (url?: string) =>
-    !!url && url !== "#" && pathname.endsWith(`/${url}`);
+    !!url && url !== "#" && (pathname?.endsWith(`/${url}`) ?? false);
 
   return (
     <SidebarGroup>

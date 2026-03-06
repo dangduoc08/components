@@ -10,8 +10,19 @@
     "support": "Support",
     "feedback": "Feedback"
   },
+  "jobs": {
+    "title": "Job Listings",
+    "postNewJob": "Post new job",
+    "open": "Open",
+    "closed": "Closed",
+    "fullTime": "Full-time",
+    "partTime": "Part-time",
+    "postedAt": "Posted date",
+    "candidates": "candidates"
+  },
   "breadcrumb": {
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "jobs": "Jobs"
   },
   "header": {
     "search": "Search",

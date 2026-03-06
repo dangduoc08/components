@@ -18,7 +18,10 @@
     "fullTime": "Toàn thời gian",
     "partTime": "Bán thời gian",
     "postedAt": "Ngày đăng",
-    "candidates": "ứng viên"
+    "candidates": "ứng viên",
+    "details": "Chi tiết",
+    "edit": "Chỉnh sửa",
+    "remove": "Xóa"
   },
   "breadcrumb": {
     "dashboard": "Bảng điều khiển",

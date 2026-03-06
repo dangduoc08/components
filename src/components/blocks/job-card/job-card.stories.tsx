@@ -26,6 +26,9 @@ const meta = {
     workType: "Full-time",
     salary: "Negotiable",
     level: "CEO",
+    detailsLabel: "Details",
+    editLabel: "Edit",
+    removeLabel: "Remove",
   },
 } satisfies Meta<typeof JobCard>;
 
@@ -45,28 +48,4 @@ export const Senior: Story = {
     salary: "$5,000",
     level: "Manager",
   },
-};
-
-export const PartTime: Story = {
-  args: {
-    title: "Product Designer",
-    logoAlt: "Facebook",
-    candidateCount: 5,
-    experience: "1–2 years",
-    workType: "Part-time",
-    salary: "$2,000",
-    level: "Senior",
-  },
-};
-
-export const Grid: Story = {
-  decorators: [
-    (Story) => (
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <Story />
-        <Story />
-        <Story />
-      </div>
-    ),
-  ],
 };

@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { JobCard } from "@/components/blocks/job-card";
 import { Button } from "@/components/ui/button";
-import { H4 } from "@/components/ui/typography";
+import { H4, Small } from "@/components/ui/typography";
 
 const JOBS = [
   {
@@ -58,13 +58,13 @@ export default async function Page({
     <div className="flex flex-col gap-6 p-6">
       <div className="flex items-center justify-between">
         <H4>{t("title")}</H4>
-        <Button size="sm">
+        <Button size="lg">
           <Plus />
-          {t("postNewJob")}
+          <Small>{t("postNewJob")}</Small>
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:flex lg:flex-wrap">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:flex lg:flex-wrap">
         {JOBS.map((job) => (
           <JobCard
             key={job.id}
@@ -78,6 +78,9 @@ export default async function Page({
             workType={job.workType}
             salary={job.salary}
             level={job.level}
+            detailsLabel={t("details")}
+            editLabel={t("edit")}
+            removeLabel={t("remove")}
           />
         ))}
       </div>

@@ -18,7 +18,10 @@
     "fullTime": "Full-time",
     "partTime": "Part-time",
     "postedAt": "Posted date",
-    "candidates": "candidates"
+    "candidates": "candidates",
+    "details": "Details",
+    "edit": "Edit",
+    "remove": "Remove"
   },
   "breadcrumb": {
     "dashboard": "Dashboard",

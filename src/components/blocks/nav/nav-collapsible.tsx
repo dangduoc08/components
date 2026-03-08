@@ -16,6 +16,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { Small } from "@/components/ui/typography";
 import { Link } from "@/i18n/navigation";
@@ -31,6 +32,7 @@ export interface INavCollapsibleProps {
 
 export function NavCollapsible({ title, items }: INavCollapsibleProps) {
   const pathname = usePathname();
+  const { isMobile, setOpenMobile } = useSidebar();
   const isActive = (url?: string) =>
     !!url && url !== "#" && (pathname?.endsWith(url) ?? false);
 
@@ -81,7 +83,12 @@ export function NavCollapsible({ title, items }: INavCollapsibleProps) {
                                 asChild
                                 isActive={isActive(subItem.url)}
                               >
-                                <Link href={subItem.url}>
+                                <Link
+                                  href={subItem.url}
+                                  onClick={() =>
+                                    isMobile && setOpenMobile(false)
+                                  }
+                                >
                                   <Small>{subItem.title}</Small>
                                 </Link>
                               </SidebarMenuSubButton>

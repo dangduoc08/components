@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { SidebarMenuButton } from "@/components/ui/sidebar";
+import { SidebarMenuButton, useSidebar } from "@/components/ui/sidebar";
 import { Small } from "@/components/ui/typography";
 import { Link } from "@/i18n/navigation";
 
@@ -14,6 +14,7 @@ export interface INavLinkItemProps {
 
 export function NavLinkItem({ item, withTooltip }: INavLinkItemProps) {
   const pathname = usePathname();
+  const { isMobile, setOpenMobile } = useSidebar();
   const isActive =
     !!item.url && item.url !== "#" && pathname.endsWith(item.url);
 
@@ -24,7 +25,10 @@ export function NavLinkItem({ item, withTooltip }: INavLinkItemProps) {
       isActive={isActive}
       tooltip={withTooltip ? item.title : undefined}
     >
-      <Link href={item.url ?? "#"}>
+      <Link
+        href={item.url ?? "#"}
+        onClick={() => isMobile && setOpenMobile(false)}
+      >
         {item.icon && <item.icon />}
         <Small>{item.title}</Small>
       </Link>

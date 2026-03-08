@@ -42,6 +42,66 @@ const JOBS = [
     salary: "Negotiable",
     level: "Senior",
   },
+  {
+    id: "4",
+    logoUrl: "/next.svg",
+    logoAlt: "Samsung",
+    title: "Backend Engineer",
+    postedAt: "01 Mar 2026",
+    candidateCount: 5,
+    experience: "3+ years",
+    workType: "Part-time",
+    salary: "Negotiable",
+    level: "Senior",
+  },
+  {
+    id: "5",
+    logoUrl: "/next.svg",
+    logoAlt: "Samsung",
+    title: "Backend Engineer",
+    postedAt: "01 Mar 2026",
+    candidateCount: 5,
+    experience: "3+ years",
+    workType: "Part-time",
+    salary: "Negotiable",
+    level: "Senior",
+  },
+  {
+    id: "6",
+    logoUrl: "/next.svg",
+    logoAlt: "Samsung",
+    title: "Backend Engineer",
+    postedAt: "01 Mar 2026",
+    candidateCount: 5,
+    experience: "3+ years",
+    workType: "Part-time",
+    salary: "Negotiable",
+    level: "Senior",
+  },
+  {
+    id: "7",
+    logoUrl: "/next.svg",
+    logoAlt: "Samsung",
+    title: "Backend Engineer",
+    postedAt: "01 Mar 2026",
+    candidateCount: 5,
+    experience: "3+ years",
+    workType: "Part-time",
+    salary: "Negotiable",
+    level: "Senior",
+  },
+  {
+    id: "8",
+    logoUrl: "/next.svg",
+    logoAlt: "Samsung",
+    title: "Backend Engineer",
+    postedAt: "01 Mar 2026",
+    candidateCount: 5,
+    experience: "3+ years",
+    workType: "Part-time",
+    salary: "Negotiable",
+    level: "Senior",
+  },
 ];
 
 export default async function Page({
@@ -64,7 +124,7 @@ export default async function Page({
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:flex lg:flex-wrap">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3 2xl:grid-cols-5">
         {JOBS.map((job) => (
           <JobCard
             key={job.id}

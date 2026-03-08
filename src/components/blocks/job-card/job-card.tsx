@@ -57,7 +57,7 @@ export function JobCard({
   removeLabel,
 }: IJobCardProps) {
   return (
-    <Card className="w-full gap-0 border-none shadow-xs lg:w-80 lg:min-h-64">
+    <Card className="w-full gap-0 border-none shadow-xs lg:min-h-64">
       <CardHeader className="gap-3 pb-4">
         <div className="flex items-start justify-between">
           <div className="size-12 overflow-hidden rounded-xl">

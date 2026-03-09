@@ -21,7 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
-import { H4, Muted, Small } from "@/components/ui/typography";
+import { Large, Muted, Small } from "@/components/ui/typography";
 
 import { JobMetaItem } from "./job-meta-item";
 
@@ -97,7 +97,7 @@ export function JobCard({
           </DropdownMenu>
         </div>
         <div className="flex flex-col gap-0.5">
-          <H4>{title}</H4>
+          <Large>{title}</Large>
           <Muted>{postedAtLabel}</Muted>
         </div>
         <div className="flex items-center gap-1.5">

@@ -12,7 +12,7 @@
   },
   "jobs": {
     "title": "Danh sách việc làm",
-    "postNewJob": "Đăng tin mới",
+    "postNewJob": "Đăng việc làm",
     "open": "Đang tuyển",
     "closed": "Đã đóng",
     "fullTime": "Toàn thời gian",
@@ -23,9 +23,50 @@
     "edit": "Chỉnh sửa",
     "remove": "Xóa"
   },
+  "postJob": {
+    "title": "Đăng tuyển việc làm",
+    "sectionBasicInfo": "Thông tin cơ bản",
+    "sectionDetails": "Chi tiết công việc",
+    "sectionSettings": "Cài đặt",
+    "jobTitle": "Tên vị trí",
+    "jobTitlePlaceholder": "Ví dụ: Senior Frontend Engineer",
+    "description": "Mô tả công việc",
+    "descriptionPlaceholder": "Mô tả vai trò, trách nhiệm và yêu cầu công việc...",
+    "workType": "Hình thức làm việc",
+    "level": "Cấp bậc",
+    "experience": "Kinh nghiệm yêu cầu",
+    "experiencePlaceholder": "Ví dụ: 2+ năm",
+    "salary": "Mức lương",
+    "salaryPlaceholder": "Ví dụ: $3,000 hoặc Thương lượng",
+    "openings": "Số lượng tuyển",
+    "deadline": "Hạn nộp hồ sơ",
+    "status": "Trạng thái",
+    "selectPlaceholder": "Chọn...",
+    "submit": "Đăng tuyển",
+    "cancel": "Hủy",
+    "workTypeOptions": {
+      "fullTime": "Toàn thời gian",
+      "partTime": "Bán thời gian",
+      "remote": "Làm từ xa",
+      "hybrid": "Kết hợp"
+    },
+    "levelOptions": {
+      "intern": "Thực tập sinh",
+      "junior": "Nhân viên",
+      "senior": "Chuyên viên cao cấp",
+      "manager": "Quản lý",
+      "director": "Giám đốc",
+      "ceo": "CEO"
+    },
+    "statusOptions": {
+      "open": "Đang tuyển",
+      "closed": "Đã đóng"
+    }
+  },
   "breadcrumb": {
     "dashboard": "Bảng điều khiển",
-    "jobs": "Việc làm"
+    "jobs": "Việc làm",
+    "new": "Đăng tuyển mới"
   },
   "header": {
     "search": "Tìm kiếm",

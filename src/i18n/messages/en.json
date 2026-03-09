@@ -23,9 +23,50 @@
     "edit": "Edit",
     "remove": "Remove"
   },
+  "postJob": {
+    "title": "Post New Job",
+    "sectionBasicInfo": "Basic Information",
+    "sectionDetails": "Job Details",
+    "sectionSettings": "Settings",
+    "jobTitle": "Job Title",
+    "jobTitlePlaceholder": "e.g. Senior Frontend Engineer",
+    "description": "Job Description",
+    "descriptionPlaceholder": "Describe the role, responsibilities, and requirements...",
+    "workType": "Work Type",
+    "level": "Job Level",
+    "experience": "Experience Required",
+    "experiencePlaceholder": "e.g. 2+ years",
+    "salary": "Salary",
+    "salaryPlaceholder": "e.g. $3,000 or Negotiable",
+    "openings": "Number of Openings",
+    "deadline": "Application Deadline",
+    "status": "Status",
+    "selectPlaceholder": "Select...",
+    "submit": "Post Job",
+    "cancel": "Cancel",
+    "workTypeOptions": {
+      "fullTime": "Full-time",
+      "partTime": "Part-time",
+      "remote": "Remote",
+      "hybrid": "Hybrid"
+    },
+    "levelOptions": {
+      "intern": "Intern",
+      "junior": "Junior",
+      "senior": "Senior",
+      "manager": "Manager",
+      "director": "Director",
+      "ceo": "CEO"
+    },
+    "statusOptions": {
+      "open": "Open",
+      "closed": "Closed"
+    }
+  },
   "breadcrumb": {
     "dashboard": "Dashboard",
-    "jobs": "Jobs"
+    "jobs": "Jobs",
+    "new": "New Job"
   },
   "header": {
     "search": "Search",

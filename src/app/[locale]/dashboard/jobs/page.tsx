@@ -1,4 +1,5 @@
 import { Plus } from "lucide-react";
+import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { JobCard } from "@/components/blocks/job-card";
@@ -118,9 +119,11 @@ export default async function Page({
     <div className="flex flex-col gap-6 p-6">
       <div className="flex items-center justify-between">
         <H4>{t("title")}</H4>
-        <Button size="lg">
-          <Plus />
-          <Small>{t("postNewJob")}</Small>
+        <Button size="lg" asChild>
+          <Link href={`/${locale}/dashboard/jobs/new`}>
+            <Plus />
+            <Small>{t("postNewJob")}</Small>
+          </Link>
         </Button>
       </div>
 

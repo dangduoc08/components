@@ -18,7 +18,7 @@ interface IThemeProviderProps {
 }
 
 function ThemeProvider({ children, themes }: IThemeProviderProps) {
-  const [theme, setThemeState] = useState("");
+  const [theme, setThemeState] = useState(themes[0].value);
   const isInitialized = useRef(false);
 
   useEffect(() => {

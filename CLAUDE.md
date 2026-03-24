@@ -5,6 +5,63 @@
 - **UI**: React 19 + Tailwind CSS + shadcn/ui
 - **React Compiler**: Enabled (`reactCompiler: true` in next.config.ts)
 
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── [locale]/                    # All routed pages (next-intl locale segment)
+│   │   ├── layout.tsx               # Locale layout (providers, fonts)
+│   │   ├── page.tsx                 # Landing page
+│   │   └── dashboard/
+│   │       ├── layout.tsx           # Dashboard layout (sidebar, header)
+│   │       ├── page.tsx
+│   │       └── jobs/
+│   │           ├── page.tsx
+│   │           └── new/page.tsx
+│   ├── themes/[theme]/route.ts      # Dynamic CSS theme route
+│   └── globals.css                  # Global styles + icon font import
+├── components/
+│   ├── ui/                          # Reusable, stateless UI primitives (shadcn-style)
+│   │   └── <component-name>/
+│   │       ├── <component-name>.tsx
+│   │       ├── index.ts             # Re-exports (mandatory)
+│   │       ├── types.ts             # Shared types (if needed)
+│   │       └── <component-name>.stories.tsx
+│   ├── blocks/                      # Page-level composite components (header, sidebar, forms)
+│   │   └── <block-name>/
+│   │       ├── <block-name>.tsx
+│   │       ├── index.ts
+│   │       └── types.ts
+│   └── providers/                   # React context providers
+│       ├── index.tsx                # Composes all providers
+│       └── <provider-name>.tsx      # One provider per file
+├── hooks/                           # Custom React hooks
+│   ├── interfaces.ts
+│   └── use-<name>.ts
+├── i18n/                            # Internationalization (next-intl)
+│   ├── messages/
+│   │   ├── en.json
+│   │   └── vi.json
+│   ├── routing.ts
+│   ├── navigation.ts
+│   └── request.ts
+├── lib/                             # Utilities and shared logic
+│   ├── utils.ts
+│   ├── types.ts
+│   └── themes.ts
+└── themes/                          # CSS theme files (one per theme)
+    └── <theme-name>.css
+```
+
+### Placement Rules
+- New page → `src/app/[locale]/<route>/page.tsx`
+- New reusable UI component → `src/components/ui/<component-name>/`
+- New page-level composite (uses multiple ui components) → `src/components/blocks/<block-name>/`
+- New hook → `src/hooks/use-<name>.ts`
+- New translation key → `src/i18n/messages/*.json` (all locales at once)
+- New utility function → `src/lib/utils.ts` (or a new file in `src/lib/` if it's a distinct domain)
+
 ## React Compiler Notes
 - Do NOT add `useMemo`, `useCallback`, or `React.memo` manually — the React Compiler handles memoization automatically.
 - Avoid patterns that break the Rules of Hooks or mutate state directly, as the compiler requires strict adherence.

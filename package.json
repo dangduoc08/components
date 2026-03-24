@@ -15,8 +15,18 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@lexical/html": "^0.41.0",
+    "@lexical/list": "^0.41.0",
+    "@lexical/markdown": "^0.41.0",
+    "@lexical/react": "^0.41.0",
+    "@lexical/rich-text": "^0.41.0",
+    "@lexical/selection": "^0.41.0",
+    "@lexical/utils": "^0.41.0",
+    "@lexkit/editor": "0.0.38",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "cmdk": "^1.1.1",
+    "lexical": "^0.41.0",
     "lucide-react": "^0.576.0",
     "next": "16.1.6",
     "next-intl": "^4.8.3",

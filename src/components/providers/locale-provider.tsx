@@ -11,9 +11,15 @@ interface ILocaleProviderProps {
   children: React.ReactNode;
   locale: string;
   messages: TNextIntlProps["messages"];
+  timeZone: string;
 }
 
-function LocaleProvider({ children, locale, messages }: ILocaleProviderProps) {
+function LocaleProvider({
+  children,
+  locale,
+  messages,
+  timeZone,
+}: ILocaleProviderProps) {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(SETTINGS_STORAGE_KEY);
@@ -26,7 +32,11 @@ function LocaleProvider({ children, locale, messages }: ILocaleProviderProps) {
   }, [locale]);
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
+    <NextIntlClientProvider
+      locale={locale}
+      messages={messages}
+      timeZone={timeZone}
+    >
       {children}
     </NextIntlClientProvider>
   );

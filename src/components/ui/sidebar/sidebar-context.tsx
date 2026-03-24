@@ -1,10 +1,10 @@
 "use client";
 
+import Cookies from "js-cookie";
 import * as React from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import {
-  SIDEBAR_COOKIE_MAX_AGE,
   SIDEBAR_COOKIE_NAME,
   SIDEBAR_KEYBOARD_SHORTCUT,
   SIDEBAR_WIDTH,
@@ -52,7 +52,11 @@ function SidebarProvider({
       _setOpen(openState);
     }
 
-    document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}; SameSite=Lax`;
+    Cookies.set(SIDEBAR_COOKIE_NAME, String(openState), {
+      expires: 7,
+      path: "/",
+      sameSite: "Lax",
+    });
   };
 
   const toggleSidebar = () => {

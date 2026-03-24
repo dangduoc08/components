@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Roboto_Mono, Roboto_Serif } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
+import { getMessages, getTimeZone, setRequestLocale } from "next-intl/server";
 import { Providers } from "@/components/providers";
 import { FontProvider } from "@/components/providers/font-provider";
 import { routing } from "@/i18n/routing";
@@ -48,6 +48,7 @@ export default async function RootLayout({
 
   setRequestLocale(locale);
   const messages = await getMessages();
+  const timeZone = await getTimeZone();
   const themes = getThemes();
 
   return (
@@ -61,7 +62,12 @@ export default async function RootLayout({
             "antialiased",
           ]}
         >
-          <Providers locale={locale} messages={messages} themes={themes}>
+          <Providers
+            locale={locale}
+            messages={messages}
+            timeZone={timeZone}
+            themes={themes}
+          >
             {children}
           </Providers>
         </FontProvider>

@@ -15,6 +15,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@lexical/code": "^0.42.0",
     "@lexical/html": "^0.42.0",
     "@lexical/list": "^0.42.0",
     "@lexical/markdown": "^0.42.0",

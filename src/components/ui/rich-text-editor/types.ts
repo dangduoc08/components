@@ -5,3 +5,15 @@ export type TableConfig = {
   columns: number;
   includeHeaders: boolean;
 };
+
+export type SelectionRect = {
+  x: number;
+  y: number;
+  positionFromRight?: boolean;
+};
+
+export type FloatingToolbarExtension = {
+  name: string;
+  getIsVisible: () => boolean;
+  getSelectionRect: () => SelectionRect | null;
+};

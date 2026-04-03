@@ -8,6 +8,7 @@ import {
   Upload,
   X,
 } from "lucide-react";
+import NextImage from "next/image";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -156,10 +157,12 @@ export function ImageDialog({
                   <div className="border rounded-lg p-4 bg-muted/20">
                     <div className="flex items-center gap-3">
                       <div className="w-16 h-16 rounded border overflow-hidden bg-muted flex-shrink-0">
-                        <img
+                        <NextImage
                           src={URL.createObjectURL(file)}
                           alt="Preview"
-                          className="w-full h-full object-cover"
+                          fill
+                          unoptimized
+                          className="object-cover"
                         />
                       </div>
                       <div className="flex-1 min-w-0">

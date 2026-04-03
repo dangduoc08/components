@@ -27,6 +27,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useEditor } from "./extensions";
+import type { FloatingToolbarExtension, SelectionRect } from "./types";
 
 interface FloatingToolbarRendererProps {
   openLinkDialog: (options?: { initialUrl?: string }) => void;
@@ -37,11 +38,13 @@ export function FloatingToolbarRenderer({
 }: FloatingToolbarRendererProps) {
   const { commands, activeStates, extensions, hasExtension } = useEditor();
   const [isVisible, setIsVisible] = useState(false);
-  const [selectionRect, setSelectionRect] = useState<any>(null);
+  const [selectionRect, setSelectionRect] = useState<SelectionRect | null>(
+    null,
+  );
 
   const floatingExtension = extensions.find(
     (ext) => ext.name === "floatingToolbar",
-  ) as any;
+  ) as FloatingToolbarExtension | undefined;
 
   useEffect(() => {
     if (!floatingExtension) return;

@@ -1,12 +1,12 @@
 "use client";
 
-import { contextMenuExtension } from "@lexkit/editor";
+import { type ContextMenuItem, contextMenuExtension } from "@lexkit/editor";
 import type React from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/lib/utils";
 
 function ShadcnContextMenuRenderer(props: {
-  items: any[];
+  items: ContextMenuItem[];
   position: { x: number; y: number };
   onClose: () => void;
   className: string;
@@ -38,10 +38,10 @@ function ShadcnContextMenuRenderer(props: {
       }}
       onContextMenu={(e) => e.preventDefault()}
     >
-      {items.map((item: any) => (
+      {items.map((item) => (
         <button
           type="button"
-          key={item.label ?? item.id}
+          key={item.label}
           className={cn(
             "relative flex w-full cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
             item.disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer",

@@ -129,7 +129,9 @@ export function EditorContent({ onReady }: EditorContentProps) {
     return () => {
       unregisterShortcuts();
       document.removeEventListener("keydown", handleKeyDown);
-      (commands as any).showCommandPalette = originalShowCommand;
+      (
+        commands as typeof commands & { showCommandPalette: () => void }
+      ).showCommandPalette = originalShowCommand;
     };
   }, [editor, commands]);
 

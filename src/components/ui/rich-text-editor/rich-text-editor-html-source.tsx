@@ -1,0 +1,30 @@
+"use client";
+
+import type React from "react";
+import { Textarea } from "@/components/ui/textarea";
+import { shadcnTheme } from "./rich-text-editor-theme";
+
+interface HTMLSourceViewProps {
+  htmlContent: string;
+  onHtmlChange: (html: string) => void;
+}
+
+export function HTMLSourceView({
+  htmlContent,
+  onHtmlChange,
+}: HTMLSourceViewProps) {
+  return (
+    <Textarea
+      className={
+        shadcnTheme.sourceView?.textarea ||
+        "w-full h-full min-h-[600px] p-4 bg-background border-none rounded-none font-mono text-sm resize-none focus:outline-none focus:ring-0"
+      }
+      value={htmlContent}
+      onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+        onHtmlChange(e.target.value)
+      }
+      placeholder="Enter HTML content..."
+      spellCheck={false}
+    />
+  );
+}

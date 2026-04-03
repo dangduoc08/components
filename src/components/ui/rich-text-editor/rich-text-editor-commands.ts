@@ -4,7 +4,7 @@ import type {
   ExtractCommands,
 } from "@lexkit/editor";
 
-import type { extensions } from "./rich-text-editor-shadcn";
+import type { extensions } from "./extensions";
 
 export type KeyboardShortcut = {
   key: string;

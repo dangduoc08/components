@@ -1,16 +1,55 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npx tsc:*)",
-      "Bash(npx biome check:*)",
-      "Bash(git -C /Users/tadangduoc/Projects/owlky status:*)",
-      "Bash(git -C /Users/tadangduoc/Projects/owlky log --oneline -5)",
-      "Bash(npx shadcn@latest add:*)",
-      "Bash(ls:*)",
-      "Bash(node -e \"const deps = require\\(''./package.json''\\).dependencies; [''@radix-ui/react-label'',''@radix-ui/react-checkbox'',''@radix-ui/react-radio-group'',''@radix-ui/react-switch'',''@radix-ui/react-select''].forEach\\(d => console.log\\(d, deps[d] || ''NOT INSTALLED''\\)\\)\")"
+      "Bash(npm run lint)",
+      "Bash(npm run format)",
+      "Bash(npm run test)",
+      "Bash(npm run test:watch)",
+      "Bash(npm run build)",
+      "Bash(npm run storybook)",
+      "Bash(npm run build-storybook)",
+      "Bash(npx shadcn@latest add *)",
+      "Bash(npx vitest *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git status)",
+      "Bash(gh issue *)",
+      "Bash(gh pr *)"
     ],
-    "additionalDirectories": [
-      "/Users/tadangduoc/Projects/owlky/src/app/[locale]/dashboard/job"
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(secrets/**)",
+      "Bash(rm -rf *)",
+      "Bash(git push --force *)"
     ]
-  }
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/pre-tool.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/lint-on-save.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "model": "claude-sonnet-4-6",
+  "autoMemoryEnabled": true,
+  "includeGitInstructions": true,
+  "respectGitignore": true
 }

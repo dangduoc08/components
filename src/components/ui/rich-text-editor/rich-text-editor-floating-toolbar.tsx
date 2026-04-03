@@ -1,0 +1,260 @@
+"use client";
+
+import {
+  AlignCenter,
+  AlignLeft,
+  AlignRight,
+  Bold,
+  Code,
+  Italic,
+  Link as LinkIcon,
+  List,
+  ListOrdered,
+  Strikethrough,
+  Type,
+  Underline,
+  Unlink,
+} from "lucide-react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Toggle } from "@/components/ui/toggle";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { useEditor } from "./extensions";
+
+interface FloatingToolbarRendererProps {
+  openLinkDialog: (options?: { initialUrl?: string }) => void;
+}
+
+export function FloatingToolbarRenderer({
+  openLinkDialog,
+}: FloatingToolbarRendererProps) {
+  const { commands, activeStates, extensions, hasExtension } = useEditor();
+  const [isVisible, setIsVisible] = useState(false);
+  const [selectionRect, setSelectionRect] = useState<any>(null);
+
+  const floatingExtension = extensions.find(
+    (ext) => ext.name === "floatingToolbar",
+  ) as any;
+
+  useEffect(() => {
+    if (!floatingExtension) return;
+    const checkState = () => {
+      setIsVisible(floatingExtension.getIsVisible());
+      setSelectionRect(floatingExtension.getSelectionRect());
+    };
+    const interval = setInterval(checkState, 200);
+    return () => clearInterval(interval);
+  }, [floatingExtension]);
+
+  if (!isVisible || !selectionRect) return null;
+
+  const isImageSelected = activeStates.imageSelected;
+
+  return createPortal(
+    <TooltipProvider>
+      <div
+        className="flex items-center gap-1 p-2 bg-background border border-border rounded-lg shadow-lg"
+        style={{
+          position: "absolute",
+          top: selectionRect.y,
+          ...(selectionRect.positionFromRight
+            ? { right: 10, left: "auto" }
+            : { left: selectionRect.x, right: "auto" }),
+          zIndex: 50,
+          pointerEvents: "auto",
+        }}
+      >
+        {isImageSelected ? (
+          <>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Toggle
+                  size="sm"
+                  variant="default"
+                  pressed={activeStates.isImageAlignedLeft}
+                  onPressedChange={() => commands.setImageAlignment("left")}
+                >
+                  <AlignLeft className="h-4 w-4" />
+                </Toggle>
+              </TooltipTrigger>
+              <TooltipContent>Align Left</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Toggle
+                  size="sm"
+                  variant="default"
+                  pressed={activeStates.isImageAlignedCenter}
+                  onPressedChange={() => commands.setImageAlignment("center")}
+                >
+                  <AlignCenter className="h-4 w-4" />
+                </Toggle>
+              </TooltipTrigger>
+              <TooltipContent>Align Center</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Toggle
+                  size="sm"
+                  variant="default"
+                  pressed={activeStates.isImageAlignedRight}
+                  onPressedChange={() => commands.setImageAlignment("right")}
+                >
+                  <AlignRight className="h-4 w-4" />
+                </Toggle>
+              </TooltipTrigger>
+              <TooltipContent>Align Right</TooltipContent>
+            </Tooltip>
+            <Separator orientation="vertical" className="h-6" />
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => {
+                    const caption = prompt("Enter caption:") || "";
+                    commands.setImageCaption(caption);
+                  }}
+                >
+                  <Type className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Edit Caption</TooltipContent>
+            </Tooltip>
+          </>
+        ) : (
+          <>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Toggle
+                  size="sm"
+                  variant="default"
+                  pressed={activeStates.bold}
+                  onPressedChange={() => commands.toggleBold()}
+                >
+                  <Bold className="h-4 w-4" />
+                </Toggle>
+              </TooltipTrigger>
+              <TooltipContent>Bold</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Toggle
+                  size="sm"
+                  variant="default"
+                  pressed={activeStates.italic}
+                  onPressedChange={() => commands.toggleItalic()}
+                >
+                  <Italic className="h-4 w-4" />
+                </Toggle>
+              </TooltipTrigger>
+              <TooltipContent>Italic</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Toggle
+                  size="sm"
+                  variant="default"
+                  pressed={activeStates.underline}
+                  onPressedChange={() => commands.toggleUnderline()}
+                >
+                  <Underline className="h-4 w-4" />
+                </Toggle>
+              </TooltipTrigger>
+              <TooltipContent>Underline</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Toggle
+                  size="sm"
+                  variant="default"
+                  pressed={activeStates.strikethrough}
+                  onPressedChange={() => commands.toggleStrikethrough()}
+                >
+                  <Strikethrough className="h-4 w-4" />
+                </Toggle>
+              </TooltipTrigger>
+              <TooltipContent>Strikethrough</TooltipContent>
+            </Tooltip>
+            <Separator orientation="vertical" className="h-6" />
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Toggle
+                  size="sm"
+                  variant="default"
+                  pressed={activeStates.code}
+                  onPressedChange={() => commands.formatText("code")}
+                >
+                  <Code className="h-4 w-4" />
+                </Toggle>
+              </TooltipTrigger>
+              <TooltipContent>Inline Code</TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Toggle
+                  size="sm"
+                  variant="default"
+                  pressed={activeStates.isLink}
+                  disabled={
+                    !activeStates.isTextSelected && !activeStates.isLink
+                  }
+                  onPressedChange={() => {
+                    if (activeStates.isLink) commands.removeLink();
+                    else if (activeStates.isTextSelected) openLinkDialog({});
+                  }}
+                >
+                  {activeStates.isLink ? (
+                    <Unlink className="h-4 w-4" />
+                  ) : (
+                    <LinkIcon className="h-4 w-4" />
+                  )}
+                </Toggle>
+              </TooltipTrigger>
+              <TooltipContent>
+                {activeStates.isLink ? "Remove Link" : "Add Link"}
+              </TooltipContent>
+            </Tooltip>
+            <Separator orientation="vertical" className="h-6" />
+            {hasExtension("list") && (
+              <>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Toggle
+                      size="sm"
+                      pressed={activeStates.unorderedList}
+                      onPressedChange={() => commands.toggleUnorderedList()}
+                    >
+                      <List className="h-4 w-4" />
+                    </Toggle>
+                  </TooltipTrigger>
+                  <TooltipContent>Bullet List</TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Toggle
+                      size="sm"
+                      pressed={activeStates.orderedList}
+                      onPressedChange={() => commands.toggleOrderedList()}
+                    >
+                      <ListOrdered className="h-4 w-4" />
+                    </Toggle>
+                  </TooltipTrigger>
+                  <TooltipContent>Numbered List</TooltipContent>
+                </Tooltip>
+              </>
+            )}
+          </>
+        )}
+      </div>
+    </TooltipProvider>,
+    document.body,
+  );
+}

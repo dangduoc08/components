@@ -23,6 +23,7 @@ import {
   Undo,
   Unlink,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -74,6 +75,7 @@ export function Toolbar({
   openLinkDialog,
   openImageDialog,
 }: ToolbarProps) {
+  const t = useTranslations("richTextEditor");
   const [showTableDialog, setShowTableDialog] = useState(false);
   const [tableConfig, setTableConfig] = useState<TableConfig>({
     rows: 3,
@@ -82,11 +84,15 @@ export function Toolbar({
   });
 
   const blockFormatOptions = [
-    { value: "p", label: "Paragraph", icon: <FileText className="h-4 w-4" /> },
-    { value: "h1", label: "Heading 1", icon: <Hash className="h-4 w-4" /> },
-    { value: "h2", label: "Heading 2", icon: <Hash className="h-4 w-4" /> },
-    { value: "h3", label: "Heading 3", icon: <Hash className="h-4 w-4" /> },
-    { value: "quote", label: "Quote", icon: <Quote className="h-4 w-4" /> },
+    {
+      value: "p",
+      label: t("paragraph"),
+      icon: <FileText className="h-4 w-4" />,
+    },
+    { value: "h1", label: t("heading1"), icon: <Hash className="h-4 w-4" /> },
+    { value: "h2", label: t("heading2"), icon: <Hash className="h-4 w-4" /> },
+    { value: "h3", label: t("heading3"), icon: <Hash className="h-4 w-4" /> },
+    { value: "quote", label: t("quote"), icon: <Quote className="h-4 w-4" /> },
   ];
 
   const currentBlockFormat = activeStates.isH1
@@ -121,7 +127,7 @@ export function Toolbar({
                 <Bold className="h-4 w-4" />
               </Toggle>
             </TooltipTrigger>
-            <TooltipContent>Bold (Ctrl+B)</TooltipContent>
+            <TooltipContent>{t("boldWithShortcut")}</TooltipContent>
           </Tooltip>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -134,7 +140,7 @@ export function Toolbar({
                 <Italic className="h-4 w-4" />
               </Toggle>
             </TooltipTrigger>
-            <TooltipContent>Italic (Ctrl+I)</TooltipContent>
+            <TooltipContent>{t("italicWithShortcut")}</TooltipContent>
           </Tooltip>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -147,7 +153,7 @@ export function Toolbar({
                 <Underline className="h-4 w-4" />
               </Toggle>
             </TooltipTrigger>
-            <TooltipContent>Underline (Ctrl+U)</TooltipContent>
+            <TooltipContent>{t("underlineWithShortcut")}</TooltipContent>
           </Tooltip>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -160,7 +166,7 @@ export function Toolbar({
                 <Strikethrough className="h-4 w-4" />
               </Toggle>
             </TooltipTrigger>
-            <TooltipContent>Strikethrough</TooltipContent>
+            <TooltipContent>{t("strikethrough")}</TooltipContent>
           </Tooltip>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -173,7 +179,7 @@ export function Toolbar({
                 <Code className="h-4 w-4" />
               </Toggle>
             </TooltipTrigger>
-            <TooltipContent>Inline Code</TooltipContent>
+            <TooltipContent>{t("inlineCode")}</TooltipContent>
           </Tooltip>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -195,7 +201,7 @@ export function Toolbar({
               </Toggle>
             </TooltipTrigger>
             <TooltipContent>
-              {activeStates.isLink ? "Remove Link" : "Insert Link"}
+              {activeStates.isLink ? t("removeLink") : t("link")}
             </TooltipContent>
           </Tooltip>
         </div>
@@ -214,7 +220,7 @@ export function Toolbar({
                     <SelectValue />
                   </SelectTrigger>
                 </TooltipTrigger>
-                <TooltipContent>Text Format</TooltipContent>
+                <TooltipContent>{t("textFormat")}</TooltipContent>
               </Tooltip>
               <SelectContent>
                 {blockFormatOptions.map((option) => (
@@ -245,7 +251,7 @@ export function Toolbar({
                   <List className="h-4 w-4" />
                 </Toggle>
               </TooltipTrigger>
-              <TooltipContent>Bullet List</TooltipContent>
+              <TooltipContent>{t("bulletList")}</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -258,7 +264,7 @@ export function Toolbar({
                   <ListOrdered className="h-4 w-4" />
                 </Toggle>
               </TooltipTrigger>
-              <TooltipContent>Numbered List</TooltipContent>
+              <TooltipContent>{t("numberedList")}</TooltipContent>
             </Tooltip>
             {(activeStates.unorderedList || activeStates.orderedList) && (
               <>
@@ -272,7 +278,7 @@ export function Toolbar({
                       <Indent className="h-4 w-4" />
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent>Indent List</TooltipContent>
+                  <TooltipContent>{t("indentList")}</TooltipContent>
                 </Tooltip>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -284,7 +290,7 @@ export function Toolbar({
                       <Outdent className="h-4 w-4" />
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent>Outdent List</TooltipContent>
+                  <TooltipContent>{t("outdentList")}</TooltipContent>
                 </Tooltip>
               </>
             )}
@@ -301,7 +307,7 @@ export function Toolbar({
                   <ImageIcon className="h-4 w-4" />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>Insert Image</TooltipContent>
+              <TooltipContent>{t("insertImage")}</TooltipContent>
             </Tooltip>
           )}
           {hasExtension("table") && (
@@ -316,7 +322,7 @@ export function Toolbar({
                     <TableIcon className="h-4 w-4" />
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>Insert Table</TooltipContent>
+                <TooltipContent>{t("insertTable")}</TooltipContent>
               </Tooltip>
               <ShadcnDialog
                 open={showTableDialog}
@@ -324,12 +330,12 @@ export function Toolbar({
               >
                 <DialogContent className="sm:max-w-md">
                   <DialogHeader>
-                    <DialogTitle>Insert Table</DialogTitle>
+                    <DialogTitle>{t("insertTableTitle")}</DialogTitle>
                   </DialogHeader>
                   <div className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="rows">Rows</Label>
+                        <Label htmlFor="rows">{t("rows")}</Label>
                         <Input
                           id="rows"
                           type="number"
@@ -352,7 +358,7 @@ export function Toolbar({
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="columns">Columns</Label>
+                        <Label htmlFor="columns">{t("columns")}</Label>
                         <Input
                           id="columns"
                           type="number"
@@ -386,7 +392,7 @@ export function Toolbar({
                           }))
                         }
                       />
-                      <Label htmlFor="headers">Include headers</Label>
+                      <Label htmlFor="headers">{t("includeHeaders")}</Label>
                     </div>
                   </div>
                   <DialogFooter>
@@ -395,7 +401,7 @@ export function Toolbar({
                         variant="outline"
                         onClick={() => setShowTableDialog(false)}
                       >
-                        Cancel
+                        {t("cancel")}
                       </Button>
                       <Button
                         onClick={() => {
@@ -403,7 +409,7 @@ export function Toolbar({
                           setShowTableDialog(false);
                         }}
                       >
-                        Insert Table
+                        {t("insertTableButton")}
                       </Button>
                     </div>
                   </DialogFooter>
@@ -422,7 +428,7 @@ export function Toolbar({
                   <Minus className="h-4 w-4" />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>Insert Horizontal Rule</TooltipContent>
+              <TooltipContent>{t("insertHorizontalRule")}</TooltipContent>
             </Tooltip>
           )}
           {hasExtension("htmlEmbed") && (
@@ -437,7 +443,7 @@ export function Toolbar({
                   <FileCode className="h-4 w-4" />
                 </Toggle>
               </TooltipTrigger>
-              <TooltipContent>HTML Embed</TooltipContent>
+              <TooltipContent>{t("htmlEmbed")}</TooltipContent>
             </Tooltip>
           )}
         </div>
@@ -457,7 +463,7 @@ export function Toolbar({
                   <Undo className="h-4 w-4" />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>Undo (Ctrl+Z)</TooltipContent>
+              <TooltipContent>{t("undo")}</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -470,7 +476,7 @@ export function Toolbar({
                   <Redo className="h-4 w-4" />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>Redo (Ctrl+Y)</TooltipContent>
+              <TooltipContent>{t("redo")}</TooltipContent>
             </Tooltip>
           </div>
         )}
@@ -484,7 +490,7 @@ export function Toolbar({
                 <CommandIcon className="h-4 w-4" />
               </Button>
             </TooltipTrigger>
-            <TooltipContent>Command Palette (Ctrl+K)</TooltipContent>
+            <TooltipContent>{t("commandPalette")}</TooltipContent>
           </Tooltip>
         </div>
       </div>

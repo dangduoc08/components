@@ -15,6 +15,7 @@ import {
   Underline,
   Unlink,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
@@ -36,6 +37,7 @@ interface FloatingToolbarRendererProps {
 export function FloatingToolbarRenderer({
   openLinkDialog,
 }: FloatingToolbarRendererProps) {
+  const t = useTranslations("richTextEditor");
   const { commands, activeStates, extensions, hasExtension } = useEditor();
   const [isVisible, setIsVisible] = useState(false);
   const [selectionRect, setSelectionRect] = useState<SelectionRect | null>(
@@ -87,7 +89,7 @@ export function FloatingToolbarRenderer({
                   <AlignLeft className="h-4 w-4" />
                 </Toggle>
               </TooltipTrigger>
-              <TooltipContent>Align Left</TooltipContent>
+              <TooltipContent>{t("alignLeft")}</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -100,7 +102,7 @@ export function FloatingToolbarRenderer({
                   <AlignCenter className="h-4 w-4" />
                 </Toggle>
               </TooltipTrigger>
-              <TooltipContent>Align Center</TooltipContent>
+              <TooltipContent>{t("alignCenter")}</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -113,7 +115,7 @@ export function FloatingToolbarRenderer({
                   <AlignRight className="h-4 w-4" />
                 </Toggle>
               </TooltipTrigger>
-              <TooltipContent>Align Right</TooltipContent>
+              <TooltipContent>{t("alignRight")}</TooltipContent>
             </Tooltip>
             <Separator orientation="vertical" className="h-6" />
             <Tooltip>
@@ -129,7 +131,7 @@ export function FloatingToolbarRenderer({
                   <Type className="h-4 w-4" />
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>Edit Caption</TooltipContent>
+              <TooltipContent>{t("editCaption")}</TooltipContent>
             </Tooltip>
           </>
         ) : (
@@ -145,7 +147,7 @@ export function FloatingToolbarRenderer({
                   <Bold className="h-4 w-4" />
                 </Toggle>
               </TooltipTrigger>
-              <TooltipContent>Bold</TooltipContent>
+              <TooltipContent>{t("bold")}</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -158,7 +160,7 @@ export function FloatingToolbarRenderer({
                   <Italic className="h-4 w-4" />
                 </Toggle>
               </TooltipTrigger>
-              <TooltipContent>Italic</TooltipContent>
+              <TooltipContent>{t("italic")}</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -171,7 +173,7 @@ export function FloatingToolbarRenderer({
                   <Underline className="h-4 w-4" />
                 </Toggle>
               </TooltipTrigger>
-              <TooltipContent>Underline</TooltipContent>
+              <TooltipContent>{t("underline")}</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -184,7 +186,7 @@ export function FloatingToolbarRenderer({
                   <Strikethrough className="h-4 w-4" />
                 </Toggle>
               </TooltipTrigger>
-              <TooltipContent>Strikethrough</TooltipContent>
+              <TooltipContent>{t("strikethrough")}</TooltipContent>
             </Tooltip>
             <Separator orientation="vertical" className="h-6" />
             <Tooltip>
@@ -198,7 +200,7 @@ export function FloatingToolbarRenderer({
                   <Code className="h-4 w-4" />
                 </Toggle>
               </TooltipTrigger>
-              <TooltipContent>Inline Code</TooltipContent>
+              <TooltipContent>{t("inlineCode")}</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -222,7 +224,7 @@ export function FloatingToolbarRenderer({
                 </Toggle>
               </TooltipTrigger>
               <TooltipContent>
-                {activeStates.isLink ? "Remove Link" : "Add Link"}
+                {activeStates.isLink ? t("removeLink") : t("addLink")}
               </TooltipContent>
             </Tooltip>
             <Separator orientation="vertical" className="h-6" />
@@ -238,7 +240,7 @@ export function FloatingToolbarRenderer({
                       <List className="h-4 w-4" />
                     </Toggle>
                   </TooltipTrigger>
-                  <TooltipContent>Bullet List</TooltipContent>
+                  <TooltipContent>{t("bulletList")}</TooltipContent>
                 </Tooltip>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -250,7 +252,7 @@ export function FloatingToolbarRenderer({
                       <ListOrdered className="h-4 w-4" />
                     </Toggle>
                   </TooltipTrigger>
-                  <TooltipContent>Numbered List</TooltipContent>
+                  <TooltipContent>{t("numberedList")}</TooltipContent>
                 </Tooltip>
               </>
             )}

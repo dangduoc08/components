@@ -9,6 +9,7 @@ import {
   X,
 } from "lucide-react";
 import NextImage from "next/image";
+import { useTranslations } from "next-intl";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -45,6 +46,7 @@ export function ImageDialog({
   onOpenChange,
   onSubmit,
 }: ImageDialogProps) {
+  const t = useTranslations("richTextEditor");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [activeTab, setActiveTab] = useState<"upload" | "url">("upload");
   const [url, setUrl] = useState("");
@@ -113,7 +115,7 @@ export function ImageDialog({
         <DialogHeader>
           <div className="flex items-center gap-2">
             <ImageIcon className="h-5 w-5" />
-            <DialogTitle>Insert Image</DialogTitle>
+            <DialogTitle>{t("imageDialogTitle")}</DialogTitle>
           </div>
         </DialogHeader>
         <div className="space-y-4">
@@ -126,16 +128,16 @@ export function ImageDialog({
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="upload" className="flex items-center gap-2">
                 <Upload className="h-4 w-4" />
-                Upload
+                {t("uploadTab")}
               </TabsTrigger>
               <TabsTrigger value="url" className="flex items-center gap-2">
                 <Globe className="h-4 w-4" />
-                URL
+                {t("urlTab")}
               </TabsTrigger>
             </TabsList>
             <TabsContent value="upload" className="space-y-4 mt-4">
               <div className="space-y-2">
-                <Label>Upload Image</Label>
+                <Label>{t("uploadLabel")}</Label>
                 {!file ? (
                   <button
                     type="button"
@@ -147,10 +149,10 @@ export function ImageDialog({
                   >
                     <CloudUpload className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
                     <p className="text-sm text-muted-foreground mb-2">
-                      Drop an image here, or click to select
+                      {t("dropZoneText")}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      Supports: JPG, PNG, GIF, WebP (max 10MB)
+                      {t("dropZoneSubtext")}
                     </p>
                   </button>
                 ) : (
@@ -196,11 +198,11 @@ export function ImageDialog({
             </TabsContent>
             <TabsContent value="url" className="space-y-4 mt-4">
               <div className="space-y-2">
-                <Label htmlFor="image-url">Image URL</Label>
+                <Label htmlFor="image-url">{t("imageUrlLabel")}</Label>
                 <Input
                   id="image-url"
                   type="url"
-                  placeholder="https://example.com/image.jpg"
+                  placeholder={t("imageUrlPlaceholder")}
                   value={url}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setUrl(e.target.value)
@@ -222,7 +224,7 @@ export function ImageDialog({
                     className="w-full justify-between p-2 h-auto"
                   >
                     <span className="text-sm font-medium">
-                      Advanced Options
+                      {t("advancedOptions")}
                     </span>
                     <ChevronDown
                       className={`h-4 w-4 transition-transform ${showAdvanced ? "rotate-180" : ""}`}
@@ -231,10 +233,10 @@ export function ImageDialog({
                 </CollapsibleTrigger>
                 <CollapsibleContent className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="image-alt">Alt Text (optional)</Label>
+                    <Label htmlFor="image-alt">{t("altLabel")}</Label>
                     <Input
                       id="image-alt"
-                      placeholder="Describe the image for accessibility"
+                      placeholder={t("altPlaceholder")}
                       value={alt}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         setAlt(e.target.value)
@@ -242,10 +244,10 @@ export function ImageDialog({
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="image-caption">Caption (optional)</Label>
+                    <Label htmlFor="image-caption">{t("captionLabel")}</Label>
                     <Input
                       id="image-caption"
-                      placeholder="Image caption"
+                      placeholder={t("captionPlaceholder")}
                       value={caption}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         setCaption(e.target.value)
@@ -260,13 +262,13 @@ export function ImageDialog({
         <DialogFooter>
           <div className="flex justify-end gap-2">
             <Button variant="outline" onClick={() => onOpenChange(false)}>
-              Cancel
+              {t("cancel")}
             </Button>
             <Button
               onClick={handleSubmit}
               disabled={activeTab === "upload" ? !file : !url.trim()}
             >
-              Insert Image
+              {t("insertImageButton")}
             </Button>
           </div>
         </DialogFooter>

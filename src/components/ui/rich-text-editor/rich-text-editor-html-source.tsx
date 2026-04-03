@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import type React from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { shadcnTheme } from "./rich-text-editor-theme";
@@ -13,6 +14,7 @@ export function HTMLSourceView({
   htmlContent,
   onHtmlChange,
 }: HTMLSourceViewProps) {
+  const t = useTranslations("richTextEditor");
   return (
     <Textarea
       className={
@@ -23,7 +25,7 @@ export function HTMLSourceView({
       onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
         onHtmlChange(e.target.value)
       }
-      placeholder="Enter HTML content..."
+      placeholder={t("htmlPlaceholder")}
       spellCheck={false}
     />
   );

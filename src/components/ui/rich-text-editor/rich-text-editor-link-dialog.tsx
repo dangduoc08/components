@@ -1,6 +1,7 @@
 "use client";
 
 import { Link as LinkIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type React from "react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -27,6 +28,7 @@ export function LinkDialog({
   initialUrl = "",
   onSubmit,
 }: LinkDialogProps) {
+  const t = useTranslations("richTextEditor");
   const [url, setUrl] = useState(initialUrl);
 
   useEffect(() => {
@@ -53,16 +55,16 @@ export function LinkDialog({
         <DialogHeader>
           <div className="flex items-center gap-2">
             <LinkIcon className="h-5 w-5" />
-            <DialogTitle>Insert Link</DialogTitle>
+            <DialogTitle>{t("linkDialogTitle")}</DialogTitle>
           </div>
         </DialogHeader>
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="link-url">URL</Label>
+            <Label htmlFor="link-url">{t("urlLabel")}</Label>
             <Input
               id="link-url"
               type="url"
-              placeholder="https://example.com"
+              placeholder={t("urlPlaceholder")}
               value={url}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setUrl(e.target.value)
@@ -75,10 +77,10 @@ export function LinkDialog({
         <DialogFooter>
           <div className="flex justify-end gap-2">
             <Button variant="outline" onClick={() => onOpenChange(false)}>
-              Cancel
+              {t("cancel")}
             </Button>
             <Button onClick={handleSubmit} disabled={!url.trim()}>
-              Insert Link
+              {t("insertLinkButton")}
             </Button>
           </div>
         </DialogFooter>

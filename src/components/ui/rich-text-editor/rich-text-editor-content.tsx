@@ -2,6 +2,7 @@
 
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import {
   CommandDialog,
@@ -36,6 +37,7 @@ interface EditorContentProps {
 }
 
 export function EditorContent({ onReady }: EditorContentProps) {
+  const t = useTranslations("richTextEditor");
   const { commands, hasExtension, activeStates, lexical: editor } = useEditor();
   const [mode, setMode] = useState<EditorMode>("visual");
   const [content, setContent] = useState({ html: "", markdown: "" });
@@ -194,7 +196,9 @@ export function EditorContent({ onReady }: EditorContentProps) {
               <ContentEditable className={shadcnTheme.contentEditable} />
             }
             placeholder={
-              <div className={shadcnTheme.placeholder}>Start typing...</div>
+              <div className={shadcnTheme.placeholder}>
+                {t("editorPlaceholder")}
+              </div>
             }
             ErrorBoundary={ErrorBoundary}
           />
@@ -228,9 +232,9 @@ export function EditorContent({ onReady }: EditorContentProps) {
         open={commandPaletteOpen}
         onOpenChange={setCommandPaletteOpen}
       >
-        <CommandInput placeholder="Type a command or search..." />
+        <CommandInput placeholder={t("commandPalettePlaceholder")} />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandEmpty>{t("noResults")}</CommandEmpty>
           {Object.entries(
             commandsToCommandPaletteItems(commands).reduce(
               (groups, cmd) => {

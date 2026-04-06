@@ -13,6 +13,7 @@ import {
   CommandList,
   CommandShortcut,
 } from "@/components/ui/command";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useEditor } from "./extensions";
 import type { ShadcnTemplateRef } from "./interfaces";
 import {
@@ -33,10 +34,20 @@ import { useImageHandlers } from "./use-image-handlers";
 
 interface EditorContentProps {
   className?: string;
+  defaultValue?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  onChange?: (html: string) => void;
   onReady?: (methods: ShadcnTemplateRef) => void;
 }
 
-export function EditorContent({ onReady }: EditorContentProps) {
+export function EditorContent({
+  defaultValue,
+  placeholder,
+  disabled,
+  onChange,
+  onReady,
+}: EditorContentProps) {
   const t = useTranslations("richTextEditor");
   const { commands, hasExtension, activeStates, lexical: editor } = useEditor();
   const [mode, setMode] = useState<EditorMode>("visual");
@@ -47,6 +58,7 @@ export function EditorContent({ onReady }: EditorContentProps) {
   const [linkInitial, setLinkInitial] = useState({ url: "" });
   const commandsRef = useRef<typeof commands>(commands);
   const onReadyRef = useRef(onReady);
+  const onChangeRef = useRef(onChange);
   const readyCalledRef = useRef(false);
   const methodsRef = useRef<ShadcnTemplateRef | null>(null);
 
@@ -57,6 +69,23 @@ export function EditorContent({ onReady }: EditorContentProps) {
   useEffect(() => {
     commandsRef.current = commands;
   }, [commands]);
+
+  useEffect(() => {
+    onChangeRef.current = onChange;
+  }, [onChange]);
+
+  useEffect(() => {
+    if (!editor) return;
+    editor.setEditable(!disabled);
+  }, [editor, disabled]);
+
+  useEffect(() => {
+    if (!editor || !onChange) return;
+    return editor.registerUpdateListener(({ dirtyElements, dirtyLeaves }) => {
+      if (dirtyElements.size === 0 && dirtyLeaves.size === 0) return;
+      onChangeRef.current?.(commandsRef.current.exportToHTML());
+    });
+  }, [editor, onChange]);
 
   methodsRef.current = {
     injectMarkdown: (markdownContent: string) => {
@@ -127,6 +156,11 @@ export function EditorContent({ onReady }: EditorContentProps) {
     };
     document.addEventListener("keydown", handleKeyDown);
     readyCalledRef.current = true;
+    if (defaultValue) {
+      editor.update(() => {
+        commandsRef.current.importFromHTML(defaultValue);
+      });
+    }
     if (methodsRef.current) onReadyRef.current?.(methodsRef.current);
     return () => {
       unregisterShortcuts();
@@ -135,7 +169,7 @@ export function EditorContent({ onReady }: EditorContentProps) {
         commands as typeof commands & { showCommandPalette: () => void }
       ).showCommandPalette = originalShowCommand;
     };
-  }, [editor, commands]);
+  }, [editor, commands, defaultValue]);
 
   const handleModeChange = (newMode: EditorMode) => {
     if (
@@ -168,13 +202,13 @@ export function EditorContent({ onReady }: EditorContentProps) {
     setContent((prev) => ({ ...prev, markdown }));
 
   return (
-    <div className="flex flex-col min-h-[500px]">
-      <div className="px-4 py-3 border-b border-border">
+    <div className="flex flex-col w-full rounded-xl border border-border bg-background shadow-sm overflow-hidden">
+      <div className="px-3 py-2 sm:px-4 sm:py-3 border-b border-border">
         <ModeTabs mode={mode} onModeChange={handleModeChange} />
       </div>
-      {mode === "visual" && (
-        <div className="z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
-          <div className="px-4 py-3">
+      {mode === "visual" && !disabled && (
+        <ScrollArea className="z-10 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 border-b border-border">
+          <div className="px-2 py-1.5 sm:px-3 sm:py-2">
             <Toolbar
               commands={commands}
               hasExtension={hasExtension}
@@ -184,20 +218,24 @@ export function EditorContent({ onReady }: EditorContentProps) {
               openImageDialog={() => setImageDialogOpen(true)}
             />
           </div>
-        </div>
+          <ScrollBar orientation="horizontal" />
+        </ScrollArea>
       )}
-      <div className="relative">
+      <div className="relative flex-1">
         <div
-          className="min-h-[600px] prose prose-lg max-w-none p-4"
+          className="min-h-75 sm:min-h-100 lg:min-h-125 prose prose-sm sm:prose-base lg:prose-lg max-w-none p-3 sm:p-4 lg:p-6"
           style={{ display: mode === "visual" ? "block" : "none" }}
         >
           <RichTextPlugin
             contentEditable={
-              <ContentEditable className={shadcnTheme.contentEditable} />
+              <ContentEditable
+                className={shadcnTheme.contentEditable}
+                aria-disabled={disabled}
+              />
             }
             placeholder={
               <div className={shadcnTheme.placeholder}>
-                {t("editorPlaceholder")}
+                {placeholder ?? t("editorPlaceholder")}
               </div>
             }
             ErrorBoundary={ErrorBoundary}

@@ -5,12 +5,12 @@ export const shadcnTheme: LexKitTheme = {
     group: "flex items-center gap-1 p-2 border-b bg-background",
   },
 
-  editor: "min-h-[400px] p-4 focus:outline-none relative",
+  editor: "min-h-100 p-4 focus:outline-none relative",
   contentEditable:
-    "outline-none text-xl leading-relaxed text-foreground font-system min-h-[600px] focus:outline-none",
+    "outline-none text-base sm:text-lg leading-relaxed text-foreground font-system min-h-75 sm:min-h-100 lg:min-h-125 focus:outline-none",
 
   placeholder:
-    "absolute top-4 left-4 text-xl leading-relaxed select-none text-muted-foreground pointer-events-none z-0",
+    "absolute top-3 left-3 sm:top-4 sm:left-4 text-base sm:text-lg leading-relaxed select-none text-muted-foreground pointer-events-none z-0",
 
   paragraph: "mb-3 leading-relaxed text-foreground",
   heading: {
@@ -130,6 +130,6 @@ export const shadcnTheme: LexKitTheme = {
 
   sourceView: {
     textarea:
-      "w-full h-full min-h-[600px] p-4 bg-background border-none rounded-none font-mono text-sm resize-none focus:outline-none focus:ring-0",
+      "w-full h-full min-h-75 sm:min-h-100 lg:min-h-125 p-3 sm:p-4 bg-background border-none rounded-none font-mono text-sm resize-none focus:outline-none focus:ring-0",
   },
 };

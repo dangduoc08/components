@@ -17,21 +17,27 @@ export function ModeTabs({ mode, onModeChange }: ModeTabsProps) {
       value={mode}
       onValueChange={(value: string) => onModeChange(value as EditorMode)}
     >
-      <TabsList className="grid w-full max-w-md grid-cols-3 bg-muted/50">
-        <TabsTrigger value="visual" className="flex items-center gap-2 text-sm">
-          <Eye className="h-4 w-4" />
-          {t("visualTab")}
+      <TabsList className="grid w-full sm:max-w-md grid-cols-3 bg-muted/50">
+        <TabsTrigger
+          value="visual"
+          className="flex items-center gap-1.5 text-xs sm:text-sm"
+        >
+          <Eye className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
+          <span className="hidden sm:inline">{t("visualTab")}</span>
         </TabsTrigger>
-        <TabsTrigger value="html" className="flex items-center gap-2 text-sm">
-          <FileCode className="h-4 w-4" />
-          {t("htmlTab")}
+        <TabsTrigger
+          value="html"
+          className="flex items-center gap-1.5 text-xs sm:text-sm"
+        >
+          <FileCode className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
+          <span className="hidden sm:inline">{t("htmlTab")}</span>
         </TabsTrigger>
         <TabsTrigger
           value="markdown"
-          className="flex items-center gap-2 text-sm"
+          className="flex items-center gap-1.5 text-xs sm:text-sm"
         >
-          <FileText className="h-4 w-4" />
-          {t("markdownTab")}
+          <FileText className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
+          <span className="hidden sm:inline">{t("markdownTab")}</span>
         </TabsTrigger>
       </TabsList>
     </Tabs>

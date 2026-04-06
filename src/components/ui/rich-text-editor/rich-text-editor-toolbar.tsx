@@ -114,8 +114,8 @@ export function Toolbar({
 
   return (
     <TooltipProvider>
-      <div className="flex flex-wrap items-center gap-2 p-2 bg-transparent">
-        <div className="flex items-center gap-1">
+      <div className="flex items-center gap-1.5 sm:gap-2 p-1 bg-transparent min-w-max">
+        <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
           <Tooltip>
             <TooltipTrigger asChild>
               <Toggle
@@ -209,14 +209,14 @@ export function Toolbar({
         <Separator orientation="vertical" className="h-6" />
 
         {hasExtension("blockFormat") && (
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
             <Select
               value={currentBlockFormat}
               onValueChange={handleBlockFormatChange}
             >
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <SelectTrigger className="w-32 h-8">
+                  <SelectTrigger className="w-28 sm:w-32 h-8">
                     <SelectValue />
                   </SelectTrigger>
                 </TooltipTrigger>
@@ -239,7 +239,7 @@ export function Toolbar({
         <Separator orientation="vertical" className="h-6" />
 
         {hasExtension("list") && (
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
             <Tooltip>
               <TooltipTrigger asChild>
                 <Toggle
@@ -299,7 +299,7 @@ export function Toolbar({
 
         <Separator orientation="vertical" className="h-6" />
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
           {hasExtension("image") && (
             <Tooltip>
               <TooltipTrigger asChild>
@@ -451,7 +451,7 @@ export function Toolbar({
         <Separator orientation="vertical" className="h-6" />
 
         {hasExtension("history") && (
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
@@ -483,7 +483,7 @@ export function Toolbar({
 
         <Separator orientation="vertical" className="h-6" />
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
           <Tooltip>
             <TooltipTrigger asChild>
               <Button size="sm" variant="ghost" onClick={onCommandPaletteOpen}>

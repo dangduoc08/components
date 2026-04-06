@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { RichTextEditor } from "@/components/ui/rich-text-editor";
 import {
   Select,
   SelectContent,
@@ -14,7 +15,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
 import { H4, Muted, Small } from "@/components/ui/typography";
 
 interface IJobPostFormState {
@@ -95,12 +95,9 @@ function JobPostForm() {
           </FieldGroup>
 
           <FieldGroup label={t("description")}>
-            <Textarea
+            <RichTextEditor
               placeholder={t("descriptionPlaceholder")}
-              value={formState.description}
-              onChange={(e) => updateField("description", e.target.value)}
-              rows={6}
-              required
+              onChange={(html) => updateField("description", html)}
             />
           </FieldGroup>
         </div>

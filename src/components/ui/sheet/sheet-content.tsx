@@ -1,8 +1,8 @@
 import { XIcon } from "lucide-react";
 import { Dialog as SheetPrimitive } from "radix-ui";
 import type * as React from "react";
-
 import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import type { TSheetSide } from "./types";
 
@@ -50,7 +50,7 @@ function SheetContent({
         )}
         {...props}
       >
-        {children}
+        <ScrollArea className="flex-1">{children}</ScrollArea>
         {showCloseButton && (
           <SheetPrimitive.Close data-slot="sheet-close" asChild>
             <Button

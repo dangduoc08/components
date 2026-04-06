@@ -1,10 +1,12 @@
 /// <reference types="vite/client" />
 import type { Decorator, Preview } from "@storybook/nextjs-vite";
 import { Roboto, Roboto_Mono, Roboto_Serif } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl";
 import { AppearanceProvider } from "../src/components/providers/appearance-provider";
 import { FontProvider } from "../src/components/providers/font-provider";
 import type { TTheme } from "../src/components/providers/types";
 import { TooltipProvider } from "../src/components/ui/tooltip";
+import enMessages from "../src/i18n/messages/en.json";
 import { applyThemeStylesheet } from "../src/lib/utils";
 import "../src/app/globals.css";
 
@@ -43,22 +45,24 @@ const preview: Preview = {
   },
   decorators: [
     ((Story, context) => (
-      <FontProvider
-        variables={[
-          fontSans.variable,
-          fontSerif.variable,
-          fontMono.variable,
-          "antialiased",
-        ]}
-      >
-        <AppearanceProvider
-          forcedAppearance={context.globals.appearance ?? "light"}
+      <NextIntlClientProvider locale="en" messages={enMessages}>
+        <FontProvider
+          variables={[
+            fontSans.variable,
+            fontSerif.variable,
+            fontMono.variable,
+            "antialiased",
+          ]}
         >
-          <TooltipProvider>
-            <Story />
-          </TooltipProvider>
-        </AppearanceProvider>
-      </FontProvider>
+          <AppearanceProvider
+            forcedAppearance={context.globals.appearance ?? "light"}
+          >
+            <TooltipProvider>
+              <Story />
+            </TooltipProvider>
+          </AppearanceProvider>
+        </FontProvider>
+      </NextIntlClientProvider>
     )) satisfies Decorator,
     ((Story, context) => {
       if (typeof document !== "undefined") {

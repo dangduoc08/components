@@ -17,10 +17,7 @@ export function HTMLSourceView({
   const t = useTranslations("richTextEditor");
   return (
     <Textarea
-      className={
-        shadcnTheme.sourceView?.textarea ||
-        "w-full h-full min-h-[600px] p-4 bg-background border-none rounded-none font-mono text-sm resize-none focus:outline-none focus:ring-0"
-      }
+      className={shadcnTheme.sourceView?.textarea}
       value={htmlContent}
       onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
         onHtmlChange(e.target.value)
